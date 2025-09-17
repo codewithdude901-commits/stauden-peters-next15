@@ -69,6 +69,12 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    teamMembers: TeamMember;
+    formSubmissions: FormSubmission;
+    locations: Location;
+    productCategories: ProductCategory;
+    products: Product;
+    projects: Project;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +83,12 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    teamMembers: TeamMembersSelect<false> | TeamMembersSelect<true>;
+    formSubmissions: FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    locations: LocationsSelect<false> | LocationsSelect<true>;
+    productCategories: ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -84,9 +96,27 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
-  locale: null;
+  globals: {
+    home: Home;
+    about: About;
+    locationsIndex: LocationsIndex;
+    productsIndex: ProductsIndex;
+    projectsIndex: ProjectsIndex;
+    contact: Contact;
+    legalImprint: LegalImprint;
+    privacyPolicy: PrivacyPolicy;
+  };
+  globalsSelect: {
+    home: HomeSelect<false> | HomeSelect<true>;
+    about: AboutSelect<false> | AboutSelect<true>;
+    locationsIndex: LocationsIndexSelect<false> | LocationsIndexSelect<true>;
+    productsIndex: ProductsIndexSelect<false> | ProductsIndexSelect<true>;
+    projectsIndex: ProjectsIndexSelect<false> | ProjectsIndexSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
+    legalImprint: LegalImprintSelect<false> | LegalImprintSelect<true>;
+    privacyPolicy: PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
+  };
+  locale: 'de' | 'en';
   user: User & {
     collection: 'users';
   };
@@ -143,7 +173,7 @@ export interface User {
  */
 export interface Media {
   id: string;
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -155,6 +185,132 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teamMembers".
+ */
+export interface TeamMember {
+  id: string;
+  photo?: (string | null) | Media;
+  name: string;
+  department?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formSubmissions".
+ */
+export interface FormSubmission {
+  id: string;
+  fullName: string;
+  email: string;
+  phone?: string | null;
+  notes?: string | null;
+  locale: 'de' | 'en';
+  consent?: boolean | null;
+  meta?: {
+    ip?: string | null;
+    userAgent?: string | null;
+    referer?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations".
+ */
+export interface Location {
+  id: string;
+  name: string;
+  slug: string;
+  thumbnail: string | Media;
+  address?: string | null;
+  phone?: string | null;
+  time?: string | null;
+  headline: string;
+  country: string;
+  paragraph1?: string | null;
+  paragraph2?: string | null;
+  paragraph3?: string | null;
+  featuredImage: string | Media;
+  managers?:
+    | {
+        name?: string | null;
+        position?: string | null;
+        image?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  gallery?:
+    | {
+        image: (string | Media)[];
+        id?: string | null;
+      }[]
+    | null;
+  teamImage?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productCategories".
+ */
+export interface ProductCategory {
+  id: string;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  scientificName: string;
+  category: string | ProductCategory;
+  thumbnail: string | Media;
+  featuredImage: string | Media;
+  details?: {
+    height?: string | null;
+    diameter?: string | null;
+    hardiness?: string | null;
+    light?: string | null;
+  };
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: string;
+  title: string;
+  slug: string;
+  thumbnail: string | Media;
+  cardTitle: string;
+  tag: string;
+  location?: string | null;
+  paragraph1?: string | null;
+  paragraph2?: string | null;
+  gallery?:
+    | {
+        image: (string | Media)[];
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -170,6 +326,30 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'teamMembers';
+        value: string | TeamMember;
+      } | null)
+    | ({
+        relationTo: 'formSubmissions';
+        value: string | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'locations';
+        value: string | Location;
+      } | null)
+    | ({
+        relationTo: 'productCategories';
+        value: string | ProductCategory;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: string | Product;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: string | Project;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -255,6 +435,130 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "teamMembers_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  photo?: T;
+  name?: T;
+  department?: T;
+  phone?: T;
+  email?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formSubmissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  fullName?: T;
+  email?: T;
+  phone?: T;
+  notes?: T;
+  locale?: T;
+  consent?: T;
+  meta?:
+    | T
+    | {
+        ip?: T;
+        userAgent?: T;
+        referer?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations_select".
+ */
+export interface LocationsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  thumbnail?: T;
+  address?: T;
+  phone?: T;
+  time?: T;
+  headline?: T;
+  country?: T;
+  paragraph1?: T;
+  paragraph2?: T;
+  paragraph3?: T;
+  featuredImage?: T;
+  managers?:
+    | T
+    | {
+        name?: T;
+        position?: T;
+        image?: T;
+        id?: T;
+      };
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  teamImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productCategories_select".
+ */
+export interface ProductCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  scientificName?: T;
+  category?: T;
+  thumbnail?: T;
+  featuredImage?: T;
+  details?:
+    | T
+    | {
+        height?: T;
+        diameter?: T;
+        hardiness?: T;
+        light?: T;
+      };
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  thumbnail?: T;
+  cardTitle?: T;
+  tag?: T;
+  location?: T;
+  paragraph1?: T;
+  paragraph2?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -284,6 +588,604 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: string;
+  sections?:
+    | (
+        | {
+            headline: string;
+            subtitle?: string | null;
+            slides?:
+              | {
+                  desktopImage: (string | Media)[];
+                  mobileImage?: (string | Media)[] | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            tagline?: string | null;
+            headline: string;
+            paragraph1: string;
+            paragraph2?: string | null;
+            image: string | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'story';
+          }
+        | {
+            tagline?: string | null;
+            headline: string;
+            paragraph?: string | null;
+            cards?:
+              | {
+                  image: string | Media;
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'features';
+          }
+        | {
+            tagline?: string | null;
+            headline: string;
+            cards?:
+              | {
+                  headline: string;
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'services';
+          }
+        | {
+            tagline?: string | null;
+            headline: string;
+            thumbnail: string | Media;
+            youtubeId: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'video';
+          }
+        | {
+            tagline?: string | null;
+            headline: string;
+            items?:
+              | {
+                  photo?: (string | null) | Media;
+                  name: string;
+                  position?: string | null;
+                  text: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials';
+          }
+      )[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: string;
+  sections?:
+    | (
+        | {
+            tagline?: string | null;
+            headline: string;
+            paragraph: string;
+            image: string | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'aboutIntro';
+          }
+        | {
+            story: {
+              tagline?: string | null;
+              headline: string;
+              paragraph: string;
+            };
+            ceo: {
+              photo: string | Media;
+              name: string;
+              position?: string | null;
+            };
+            missionVision?: {
+              cards?:
+                | {
+                    name: string;
+                    text: string;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'aboutCombined';
+          }
+        | {
+            tagline?: string | null;
+            headline: string;
+            members?: (string | TeamMember)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'teamSection';
+          }
+      )[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locationsIndex".
+ */
+export interface LocationsIndex {
+  id: string;
+  sections?:
+    | {
+        tagline?: string | null;
+        headline: string;
+        paragraph1: string;
+        paragraph2?: string | null;
+        image: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'locationsIntro';
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productsIndex".
+ */
+export interface ProductsIndex {
+  id: string;
+  sections?:
+    | {
+        tagline?: string | null;
+        headline: string;
+        paragraph?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'productsIntro';
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projectsIndex".
+ */
+export interface ProjectsIndex {
+  id: string;
+  sections?:
+    | {
+        tagline?: string | null;
+        headline: string;
+        paragraph?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'projectsIntro';
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  address?: {
+    line1?: string | null;
+    line2?: string | null;
+    line3?: string | null;
+    phone?: string | null;
+    email?: string | null;
+  };
+  socials?: {
+    facebook?: string | null;
+    instagram?: string | null;
+    linkedIn?: string | null;
+    youtube?: string | null;
+  };
+  formLabels?: {
+    fullName?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    notes?: string | null;
+    submitButton?: string | null;
+  };
+  formErrors?: {
+    required?: string | null;
+    invalidEmail?: string | null;
+    invalidPhone?: string | null;
+  };
+  formSuccess?: string | null;
+  formSettings: {
+    toEmail: string;
+    subjectPrefix?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legalImprint".
+ */
+export interface LegalImprint {
+  id: string;
+  sections?:
+    | {
+        heading?: string | null;
+        paragraph: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'legalSection';
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacyPolicy".
+ */
+export interface PrivacyPolicy {
+  id: string;
+  sections?:
+    | {
+        heading?: string | null;
+        paragraph: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'legalSection';
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              headline?: T;
+              subtitle?: T;
+              slides?:
+                | T
+                | {
+                    desktopImage?: T;
+                    mobileImage?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        story?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              paragraph1?: T;
+              paragraph2?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        features?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              paragraph?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        services?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              cards?:
+                | T
+                | {
+                    headline?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        video?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              thumbnail?: T;
+              youtubeId?: T;
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              items?:
+                | T
+                | {
+                    photo?: T;
+                    name?: T;
+                    position?: T;
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        aboutIntro?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              paragraph?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        aboutCombined?:
+          | T
+          | {
+              story?:
+                | T
+                | {
+                    tagline?: T;
+                    headline?: T;
+                    paragraph?: T;
+                  };
+              ceo?:
+                | T
+                | {
+                    photo?: T;
+                    name?: T;
+                    position?: T;
+                  };
+              missionVision?:
+                | T
+                | {
+                    cards?:
+                      | T
+                      | {
+                          name?: T;
+                          text?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        teamSection?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              members?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locationsIndex_select".
+ */
+export interface LocationsIndexSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        locationsIntro?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              paragraph1?: T;
+              paragraph2?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productsIndex_select".
+ */
+export interface ProductsIndexSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        productsIntro?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              paragraph?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projectsIndex_select".
+ */
+export interface ProjectsIndexSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        projectsIntro?:
+          | T
+          | {
+              tagline?: T;
+              headline?: T;
+              paragraph?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  address?:
+    | T
+    | {
+        line1?: T;
+        line2?: T;
+        line3?: T;
+        phone?: T;
+        email?: T;
+      };
+  socials?:
+    | T
+    | {
+        facebook?: T;
+        instagram?: T;
+        linkedIn?: T;
+        youtube?: T;
+      };
+  formLabels?:
+    | T
+    | {
+        fullName?: T;
+        email?: T;
+        phone?: T;
+        notes?: T;
+        submitButton?: T;
+      };
+  formErrors?:
+    | T
+    | {
+        required?: T;
+        invalidEmail?: T;
+        invalidPhone?: T;
+      };
+  formSuccess?: T;
+  formSettings?:
+    | T
+    | {
+        toEmail?: T;
+        subjectPrefix?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legalImprint_select".
+ */
+export interface LegalImprintSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        legalSection?:
+          | T
+          | {
+              heading?: T;
+              paragraph?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacyPolicy_select".
+ */
+export interface PrivacyPolicySelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        legalSection?:
+          | T
+          | {
+              heading?: T;
+              paragraph?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
