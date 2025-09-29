@@ -17,13 +17,13 @@ export const Locations: CollectionConfig = {
       required: true,
       localized: true, // "München" vs "Munich"
     },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      localized: true, // SEO-friendly slugs in both DE/EN
-    },
+    // {
+    //   name: 'slug',
+    //   type: 'text',
+    //   required: true,
+    //   unique: true,
+    //   localized: true, // SEO-friendly slugs in both DE/EN
+    // },
 
     // Card fields (shown on index)
     {
@@ -48,7 +48,7 @@ export const Locations: CollectionConfig = {
       name: 'country',
       type: 'text',
       required: true,
-      localized: true, // "Deutschland" vs "Germany"
+      // localized: true, // "Deutschland" vs "Germany"
     },
     { name: 'paragraph1', type: 'textarea', localized: true },
     { name: 'paragraph2', type: 'textarea', localized: true },

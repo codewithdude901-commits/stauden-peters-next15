@@ -70,11 +70,12 @@ export interface Config {
     users: User;
     media: Media;
     teamMembers: TeamMember;
-    formSubmissions: FormSubmission;
+    categories: Category;
     locations: Location;
     productCategories: ProductCategory;
     products: Product;
     projects: Project;
+    formSubmissions: FormSubmission;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -84,11 +85,12 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     teamMembers: TeamMembersSelect<false> | TeamMembersSelect<true>;
-    formSubmissions: FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     locations: LocationsSelect<false> | LocationsSelect<true>;
     productCategories: ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    formSubmissions: FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -202,21 +204,30 @@ export interface TeamMember {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "formSubmissions".
+ * via the `definition` "categories".
  */
-export interface FormSubmission {
+export interface Category {
   id: string;
-  fullName: string;
-  email: string;
-  phone?: string | null;
-  notes?: string | null;
-  locale: 'de' | 'en';
-  consent?: boolean | null;
-  meta?: {
-    ip?: string | null;
-    userAgent?: string | null;
-    referer?: string | null;
-  };
+  title?: string | null;
+  category: string | ProductCategory;
+  headline: string;
+  videoId: string;
+  paragraph1: string;
+  image1: string | Media;
+  paragraph2?: string | null;
+  paragraph3?: string | null;
+  image2?: (string | null) | Media;
+  buttonText: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productCategories".
+ */
+export interface ProductCategory {
+  id: string;
+  title: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -227,7 +238,6 @@ export interface FormSubmission {
 export interface Location {
   id: string;
   name: string;
-  slug: string;
   thumbnail: string | Media;
   address?: string | null;
   phone?: string | null;
@@ -258,26 +268,15 @@ export interface Location {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "productCategories".
- */
-export interface ProductCategory {
-  id: string;
-  title: string;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products".
  */
 export interface Product {
   id: string;
   name: string;
-  slug: string;
-  scientificName: string;
+  scientificName?: string | null;
   category: string | ProductCategory;
   thumbnail: string | Media;
+  thumbnailColor: string;
   featuredImage: string | Media;
   details?: {
     height?: string | null;
@@ -296,7 +295,6 @@ export interface Product {
 export interface Project {
   id: string;
   title: string;
-  slug: string;
   thumbnail: string | Media;
   cardTitle: string;
   tag: string;
@@ -309,6 +307,26 @@ export interface Project {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formSubmissions".
+ */
+export interface FormSubmission {
+  id: string;
+  fullName: string;
+  email: string;
+  phone?: string | null;
+  notes?: string | null;
+  locale: 'de' | 'en';
+  consent?: boolean | null;
+  meta?: {
+    ip?: string | null;
+    userAgent?: string | null;
+    referer?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -332,8 +350,8 @@ export interface PayloadLockedDocument {
         value: string | TeamMember;
       } | null)
     | ({
-        relationTo: 'formSubmissions';
-        value: string | FormSubmission;
+        relationTo: 'categories';
+        value: string | Category;
       } | null)
     | ({
         relationTo: 'locations';
@@ -350,6 +368,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: string | Project;
+      } | null)
+    | ({
+        relationTo: 'formSubmissions';
+        value: string | FormSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -448,22 +470,19 @@ export interface TeamMembersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "formSubmissions_select".
+ * via the `definition` "categories_select".
  */
-export interface FormSubmissionsSelect<T extends boolean = true> {
-  fullName?: T;
-  email?: T;
-  phone?: T;
-  notes?: T;
-  locale?: T;
-  consent?: T;
-  meta?:
-    | T
-    | {
-        ip?: T;
-        userAgent?: T;
-        referer?: T;
-      };
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  headline?: T;
+  videoId?: T;
+  paragraph1?: T;
+  image1?: T;
+  paragraph2?: T;
+  paragraph3?: T;
+  image2?: T;
+  buttonText?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -473,7 +492,6 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
  */
 export interface LocationsSelect<T extends boolean = true> {
   name?: T;
-  slug?: T;
   thumbnail?: T;
   address?: T;
   phone?: T;
@@ -508,7 +526,6 @@ export interface LocationsSelect<T extends boolean = true> {
  */
 export interface ProductCategoriesSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -518,10 +535,10 @@ export interface ProductCategoriesSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   name?: T;
-  slug?: T;
   scientificName?: T;
   category?: T;
   thumbnail?: T;
+  thumbnailColor?: T;
   featuredImage?: T;
   details?:
     | T
@@ -541,7 +558,6 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
   thumbnail?: T;
   cardTitle?: T;
   tag?: T;
@@ -553,6 +569,27 @@ export interface ProjectsSelect<T extends boolean = true> {
     | {
         image?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "formSubmissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  fullName?: T;
+  email?: T;
+  phone?: T;
+  notes?: T;
+  locale?: T;
+  consent?: T;
+  meta?:
+    | T
+    | {
+        ip?: T;
+        userAgent?: T;
+        referer?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -1,73 +1,89 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Check, ChevronDown } from "lucide-react";
+import { useMemo } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Check, ChevronDown } from 'lucide-react'
 
-type Alternate = { de: string; en: string } | null;
-const locales = [{ code: "de", label: "De" }, { code: "en", label: "En" }];
+type Locale = 'de' | 'en'
 
+const locales = [
+  { code: 'de' as const, label: 'De' },
+  { code: 'en' as const, label: 'En' },
+]
+
+/**
+ * Map top-level DE segments to EN equivalents.
+ * Add/change entries to suit your site structure.
+ */
 const SEGMENT_MAP: Record<string, string> = {
-  standorte: "locations",
-  produkte: "products",
-  projekte: "projects",
-  kontakt: "contact",
-  about: "about",
-};
+  standorte: 'locations',
+  produkte: 'products',
+  projekte: 'projects',
+  kontakt: 'contact',
+  about: 'about',
+  // kategorie: 'category', // important for /kategorie/[id] <-> /en/category/[id]
+}
 
-function mapPathToLocale(pathname: string, targetLocale: "de" | "en"): string {
-  if (!pathname) return targetLocale === "de" ? "/" : "/en";
-  const clean = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
-  const isEnglish = clean.startsWith("/en");
-  const withoutPrefix = isEnglish ? clean.replace(/^\/en/, "") : clean;
-  const parts = withoutPrefix === "" ? [] : withoutPrefix.split("/").filter(Boolean);
-  if (parts.length === 0) return targetLocale === "de" ? "/" : "/en";
-  const first = parts[0];
-  let mappedFirst = first;
-  if (targetLocale === "en") mappedFirst = SEGMENT_MAP[first] ?? first;
-  else {
-    const rev = Object.entries(SEGMENT_MAP).find(([, enVal]) => enVal === first);
-    mappedFirst = rev ? rev[0] : first;
-  }
-  // if detail route, return index path to avoid 404
-  return targetLocale === "de" ? `/${mappedFirst}` : `/en/${mappedFirst}`;
+const REVERSE_SEGMENT_MAP: Record<string, string> = Object.fromEntries(
+  Object.entries(SEGMENT_MAP).map(([de, en]) => [en, de]),
+)
+
+/**
+ * Remap only the FIRST path segment between locales and keep the rest (ids/slugs) intact.
+ * Examples:
+ *  - /kategorie/123  -> /en/category/123
+ *  - /en/projects/abc -> /projekte/abc
+ *  - /               -> /en
+ */
+function mapPathToLocale(pathname: string, targetLocale: Locale): string {
+  if (!pathname) return targetLocale === 'de' ? '/' : '/en'
+
+  // normalize trailing slash (except for root)
+  const clean = pathname === '/' ? '/' : pathname.replace(/\/$/, '')
+  const isEnglish = clean.startsWith('/en')
+  const withoutPrefix = isEnglish ? clean.replace(/^\/en/, '') : clean
+
+  // split into parts ('' => [])
+  const parts = withoutPrefix === '' ? [] : withoutPrefix.split('/').filter(Boolean)
+
+  // root
+  if (parts.length === 0) return targetLocale === 'de' ? '/' : '/en'
+
+  // remap only the first segment
+  const [first, ...rest] = parts
+
+  const mappedFirst =
+    targetLocale === 'en' ? (SEGMENT_MAP[first] ?? first) : (REVERSE_SEGMENT_MAP[first] ?? first)
+
+  const rebuilt = [mappedFirst, ...rest].join('/')
+
+  return targetLocale === 'de' ? `/${rebuilt}` : `/en/${rebuilt}`
 }
 
 export default function LocaleSwitcher() {
-  const pathname = usePathname() ?? "/";
-  const isEnglish = pathname.startsWith("/en");
-  const currentLocale: "de" | "en" = isEnglish ? "en" : "de";
+  const router = useRouter()
+  const pathname = usePathname() ?? '/'
+  const isEnglish = pathname.startsWith('/en')
+  const currentLocale: Locale = isEnglish ? 'en' : 'de'
 
-  const [alternate, setAlternate] = useState<Alternate>(() => {
-    if (typeof window !== "undefined" && (window as any).__ALTERNATE) {
-      return (window as any).__ALTERNATE as Alternate;
-    }
-    return null;
-  });
+  const currentLabel = useMemo(
+    () => locales.find((l) => l.code === currentLocale)?.label ?? 'De',
+    [currentLocale],
+  )
 
-  useEffect(() => {
-    const handler = () => setAlternate((window as any).__ALTERNATE ?? null);
-    window.addEventListener("alternateReady", handler);
-    return () => window.removeEventListener("alternateReady", handler);
-  }, []);
-
-  const handleSwitch = (locale: "de" | "en") => {
-    if (locale === currentLocale) return;
-    if (alternate) {
-      const target = alternate[locale];
-      if (target) { window.location.href = target; return; }
-    }
-    const target = mapPathToLocale(pathname, locale);
-    window.location.href = target || (locale === "de" ? "/" : "/en");
-  };
+  const handleSwitch = (locale: Locale) => {
+    if (locale === currentLocale) return
+    const target = mapPathToLocale(pathname, locale)
+    router.push(target)
+  }
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" className="flex items-center gap-2 bg-transparent border-[0.5px]">
-          {locales.find((l) => l.code === currentLocale)?.label}
+          {currentLabel}
           <ChevronDown className="size-4" />
         </Button>
       </PopoverTrigger>
@@ -76,7 +92,7 @@ export default function LocaleSwitcher() {
         {locales.map((locale) => (
           <button
             key={locale.code}
-            onClick={() => handleSwitch(locale.code as "de" | "en")}
+            onClick={() => handleSwitch(locale.code)}
             className="flex items-center w-full px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition"
           >
             {locale.label}
@@ -85,5 +101,5 @@ export default function LocaleSwitcher() {
         ))}
       </PopoverContent>
     </Popover>
-  );
+  )
 }

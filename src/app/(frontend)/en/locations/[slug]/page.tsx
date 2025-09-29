@@ -7,7 +7,7 @@ import React from 'react'
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug
-  const data = await fetchDocById<Location>('locations', slug, 'de')
+  const data = await fetchDocById<Location>('locations', slug, 'en')
   // console.log(data)
   if (!data) return notFound()
 

@@ -8,12 +8,12 @@ import LocaleSwitcher from './LocaleSwitcher'
 import MobileNavEN from './MobileNavEN'
 
 const MenuItemsEN = [
-  { name: 'home', link: `/` },
-  { name: 'about', link: `/about` },
-  { name: 'Locations', link: `/locations` },
-  { name: 'Products', link: `/products` },
-  { name: 'Projects', link: `/projects` },
-  { name: 'Contact', link: `/contact` },
+  { name: 'home', link: `/en` },
+  { name: 'about', link: `/en/about` },
+  { name: 'Locations', link: `/en/locations` },
+  { name: 'Products', link: `/en/products` },
+  { name: 'Projects', link: `/en/projects` },
+  { name: 'Contact', link: `/en/contact` },
 ]
 
 const HeaderEN = () => {

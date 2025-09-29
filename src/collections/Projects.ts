@@ -17,13 +17,13 @@ export const Projects: CollectionConfig = {
       required: true,
       localized: true,
     },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      localized: true,
-    },
+    // {
+    //   name: 'slug',
+    //   type: 'text',
+    //   required: true,
+    //   unique: true,
+    //   localized: true,
+    // },
 
     // Card fields
     {

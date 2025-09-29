@@ -48,6 +48,7 @@ export default async function HomePageDE() {
                 headline={block.headline}
                 paragraph={block.paragraph}
                 cards={block.cards}
+                locale={""}
               />
             )
 

@@ -7,7 +7,7 @@ interface YouTubeThumbnailPlayerProps {
   loop?: boolean
   mute?: boolean
   controls?: boolean
-  thumbnail: {
+  thumbnail?: {
     url: string
     alt: string
   }
@@ -53,8 +53,8 @@ const YouTubeThumbnailPlayer: React.FC<YouTubeThumbnailPlayerProps> = ({
         <>
           {/* Thumbnail */}
           <img
-            src={thumbnail.url}
-            alt={thumbnail.alt || 'YouTube Video Thumbnail'}
+            src={thumbnail?.url}
+            alt={thumbnail?.alt || 'YouTube Video Thumbnail'}
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
           {/* Play Button Overlay */}

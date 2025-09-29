@@ -13,9 +13,10 @@ interface Props {
   headline: string
   paragraph: string
   cards: Card[]
+  locale: string
 }
 
-const Features = ({ tagline, headline, paragraph, cards }: Props) => {
+const Features = ({ tagline, headline, paragraph, cards, locale }: Props) => {
   return (
     <section className="bg-yellow-50/50 py-12 md:py-16 lg:py-24">
       <div className="  padding">
@@ -36,7 +37,7 @@ const Features = ({ tagline, headline, paragraph, cards }: Props) => {
           {/* right section */}
           <div className="flex gap-4 justify-center flex-col lg:flex-row text-justify">
             <Link
-              href={'/category/1'}
+              href={locale === 'en' && '/en/category/elegrass' || '/category/elegrass'}
               className="max-w-[400px] mx-auto
              bg-white flex flex-col gap-2 p-4 md:p-6 pb-2  rounded-lg transition-all ease-linear duration-300 shadow-lg hover:scale-[101%] "
             >
@@ -58,7 +59,7 @@ const Features = ({ tagline, headline, paragraph, cards }: Props) => {
               </p>
             </Link>
             <Link
-              href={'/category/2'}
+             href={locale === 'en' && '/en/category/elegardens' || '/category/elegardens'}
               className="max-w-[400px] mx-auto
              bg-white flex flex-col gap-2 p-4 md:p-6 pb-2  rounded-lg transition-all ease-linear duration-300 shadow-lg hover:scale-[101%]"
             >
@@ -81,7 +82,7 @@ const Features = ({ tagline, headline, paragraph, cards }: Props) => {
               </p>
             </Link>
             <Link
-              href={'/category/3'}
+            href={locale === 'en' && '/en/category/elerose' || '/category/elerose'}
               className="max-w-[400px] mx-auto
              bg-white flex flex-col gap-2 p-4 md:p-6 pb-2  rounded-lg transition-all ease-linear duration-300 shadow-lg hover:scale-[101%] "
             >

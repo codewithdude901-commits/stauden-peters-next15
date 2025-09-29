@@ -65,3 +65,37 @@ export async function fetchDocBySlugWithLocales(
   // data will include fields like slug: { de: '...', en: '...' }
   return data
 }
+
+export async function fetchDocById<T>(
+  collection: string,
+  id: string,
+  locale: 'de' | 'en',
+): Promise<T | null> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${collection}?where[id][equals]=${id}&locale=${locale}`,
+    // { next: { revalidate: 60 } }
+  )
+
+  // console.log('************res***************', res)
+
+  if (!res.ok) throw new Error(`Failed to fetch doc by id: ${collection}`)
+
+  const data = await res.json()
+  return data.docs?.[0] ?? null
+}
+
+export async function fetchDocByCategory<T>(
+  collection: string,
+  category: string,
+  locale: 'de' | 'en',
+): Promise<T | null> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${collection}?where[category.title][equals]=${category}&locale=${locale}`,
+    // { next: { revalidate: 60 } }
+  )
+
+  if (!res.ok) throw new Error(`Failed to fetch doc by id: ${collection}`)
+
+  const data = await res.json()
+  return data.docs?.[0] ?? null
+}

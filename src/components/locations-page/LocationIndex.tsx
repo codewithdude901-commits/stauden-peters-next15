@@ -5,9 +5,11 @@ import Link from 'next/link'
 const LocationIndex = ({
   introData,
   locationData,
+  locationH3,
 }: {
   introData: LocationsIndex
   locationData: Location[]
+  locationH3: string
 }) => {
   if (!introData.sections) return null
   const data = introData?.sections[0]
@@ -39,13 +41,11 @@ const LocationIndex = ({
       {/* Locations Grid */}
       <div className="py-12 md:py-16  bg-yellow-50/50">
         <div className="">
-          <h3 className="text-xl font-semibold text-blue-500 mb-4 text-center">Besuchen Sie uns</h3>
-          {/* <h3 className="text-xl font-semibold text-blue-500 mb-4 text-center">
-            Visit Us
-          </h3> */}
+          <h3 className="text-xl font-semibold text-blue-500 mb-4 text-center">{locationH3}</h3>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 padding">
             {locationData.map((location) => (
-              <Link href={`/standorte/${location.slug}`} key={location.id}>
+              <Link href={`/en/locations/${location.id}`} key={location.id}>
                 <div className="bg-white rounded-xl shadow-md items-stretch h-full">
                   <div className="rounded-t-xl overflow-hidden h-64 border  ">
                     <img

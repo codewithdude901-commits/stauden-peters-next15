@@ -24,6 +24,7 @@ import { ProjectsIndex } from './globals/ProjectsIndex'
 import { Contact } from './globals/Contact'
 import { LegalImprint } from './globals/LegalImprint'
 import { PrivacyPolicy } from './globals/PrivacyPolicy'
+import { Categories } from './collections/Categories'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,11 +40,12 @@ export default buildConfig({
     Users,
     Media,
     TeamMembers,
-    FormSubmissions,
+    Categories,
     Locations,
     ProductCategories,
     Products,
     Projects,
+    FormSubmissions,
   ],
   globals: [
     Home,

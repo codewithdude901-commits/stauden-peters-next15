@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 const MobileNavEN = () => {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-
+ 
   const MenuItemsEN = [
     { name: 'home', link: `/` },
     { name: 'about', link: `/about` },

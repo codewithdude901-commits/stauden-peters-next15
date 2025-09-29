@@ -1,5 +1,6 @@
 import { CollectionConfig, CollectionSlug } from 'payload'
 import { ProductCategories } from './ProductCategories'
+import { COLOR } from '@/lib/color'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -18,17 +19,17 @@ export const Products: CollectionConfig = {
       required: true,
       localized: true, // "Rosenstrauch" vs "Rose Bush"
     },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      localized: true,
-    },
+    // {
+    //   name: 'slug',
+    //   type: 'text',
+    //   required: true,
+    //   unique: true,
+    //   localized: true,
+    // },
     {
       name: 'scientificName',
       type: 'text',
-      required: true, // Latin, same across locales
+      // required: true, // Latin, same across locales
     },
 
     // Category
@@ -46,7 +47,11 @@ export const Products: CollectionConfig = {
       relationTo: 'media',
       required: true,
     },
-   
+  COLOR({
+      name: 'thumbnailColor',
+      label: 'Thumbnail Color',
+      required: true,
+    }),
 
     // Detail content
     {
@@ -55,7 +60,7 @@ export const Products: CollectionConfig = {
       relationTo: 'media',
       required: true,
     },
-  
+
     {
       name: 'details',
       type: 'group',
