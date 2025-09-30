@@ -64,10 +64,10 @@ export const Projects: CollectionConfig = {
     },
     {
       name: 'gallery',
-      type: 'array',
+      type: 'group',
       fields: [
         {
-          name: 'image',
+          name: 'images',
           type: 'upload',
           relationTo: 'media',
           required: true,

@@ -5,12 +5,22 @@ import { useEffect, useMemo, useState } from 'react'
 import { ProductCard } from './ProcuctCard'
 import { Product, ProductCategory, ProductsIndex } from '@/payload-types'
 
+interface ProductDataProps {
+  docs: Product[]
+  totalPages: number
+  totalDocs: number
+  limit: number
+  page: number
+  hasPrevPage: boolean
+  hasNextPage: boolean
+}
+
 const ProductIndex = ({
   introData,
   productData,
 }: {
   introData: ProductsIndex
-  productData: Product[]
+  productData: ProductDataProps
 }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -31,22 +41,8 @@ const ProductIndex = ({
     router.replace(`?${params.toString()}`, { scroll: false })
   }, [selectedCategories, currentPage, router])
 
-  // Filter products by category
-  const filteredProducts = useMemo(() => {
-    return productData.filter(
-      (product) =>
-        selectedCategories.length === 0 ||
-        selectedCategories.includes((product.category as ProductCategory).title),
-    )
-  }, [selectedCategories])
-
-  // Pagination
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const currentProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage)
-
   const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
+    if (page >= 1 && page <= productData.totalPages) {
       setCurrentPage(page)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
@@ -92,13 +88,13 @@ const ProductIndex = ({
 
       {/* Products */}
       <div>
-        {currentProducts.length === 0 ? (
+        {productData.docs.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
             No plants found matching your criteria
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 w-full">
-            {currentProducts.map((product) => (
+            {productData.docs.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
@@ -106,7 +102,7 @@ const ProductIndex = ({
       </div>
 
       {/* Pagination */}
-      {totalPages > 1 && (
+      {productData.totalPages > 1 && (
         <div className="flex justify-center mt-8 gap-2">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -115,7 +111,7 @@ const ProductIndex = ({
           >
             Prev
           </button>
-          {Array.from({ length: totalPages }, (_, index) => (
+          {Array.from({ length: productData.totalPages }, (_, index) => (
             <button
               key={index + 1}
               onClick={() => handlePageChange(index + 1)}
@@ -128,7 +124,7 @@ const ProductIndex = ({
           ))}
           <button
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
+            disabled={currentPage === productData.totalPages}
             className="px-3 py-1 border rounded disabled:opacity-50"
           >
             Next

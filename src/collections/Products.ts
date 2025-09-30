@@ -17,7 +17,6 @@ export const Products: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
-      localized: true, // "Rosenstrauch" vs "Rose Bush"
     },
     // {
     //   name: 'slug',
@@ -47,27 +46,36 @@ export const Products: CollectionConfig = {
       relationTo: 'media',
       required: true,
     },
-  COLOR({
+    COLOR({
       name: 'thumbnailColor',
       label: 'Thumbnail Color',
       required: true,
+      defaultValue: '#875b72',
     }),
 
     // Detail content
     {
-      name: 'featuredImage',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
+      name: 'gallery',
+      type: 'group',
+
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+          hasMany: true,
+        },
+      ],
     },
 
     {
       name: 'details',
       type: 'group',
       fields: [
-        { name: 'height', type: 'text', localized: true },
-        { name: 'diameter', type: 'text', localized: true },
-        { name: 'hardiness', type: 'text', localized: true },
+        { name: 'height', type: 'text' },
+        { name: 'diameter', type: 'text' },
+        { name: 'hardiness', type: 'text' },
         { name: 'light', type: 'text', localized: true },
       ],
     },

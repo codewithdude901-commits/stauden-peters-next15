@@ -16,7 +16,7 @@ export async function fetchGlobal<T>(slug: GlobalSlug, locale: 'de' | 'en'): Pro
 // src/lib/fetchFromCMS.ts
 export async function fetchCollection<T>(slug: string, locale: 'de' | 'en'): Promise<T[]> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${slug}?locale=${locale}`,
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${slug}?locale=${locale}&limit=25`,
     // { next: { revalidate: 60 } }
   )
 
@@ -24,6 +24,24 @@ export async function fetchCollection<T>(slug: string, locale: 'de' | 'en'): Pro
 
   const data = await res.json()
   return data.docs as T[]
+}
+
+export async function fetchCollectionByCategory<T>(
+  slug: string,
+  locale: 'de' | 'en',
+  category: string,
+  page: number,
+): Promise<T[]> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${slug}?locale=${locale}&limit=12&where[category.title][equals]=${encodeURIComponent(category)}&sort=createdAt&page=${page}`,
+    // { next: { revalidate: 60 } }
+  )
+
+  if (!res.ok) throw new Error(`Failed to fetch collection: ${slug}`)
+
+  const data = await res.json()
+  // console.log(data)
+  return data as T[]
 }
 
 export async function fetchDocBySlug<T>(

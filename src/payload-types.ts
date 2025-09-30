@@ -277,7 +277,9 @@ export interface Product {
   category: string | ProductCategory;
   thumbnail: string | Media;
   thumbnailColor: string;
-  featuredImage: string | Media;
+  gallery: {
+    image: (string | Media)[];
+  };
   details?: {
     height?: string | null;
     diameter?: string | null;
@@ -301,12 +303,9 @@ export interface Project {
   location?: string | null;
   paragraph1?: string | null;
   paragraph2?: string | null;
-  gallery?:
-    | {
-        image: (string | Media)[];
-        id?: string | null;
-      }[]
-    | null;
+  gallery: {
+    images: (string | Media)[];
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -539,7 +538,11 @@ export interface ProductsSelect<T extends boolean = true> {
   category?: T;
   thumbnail?: T;
   thumbnailColor?: T;
-  featuredImage?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+      };
   details?:
     | T
     | {
@@ -567,8 +570,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   gallery?:
     | T
     | {
-        image?: T;
-        id?: T;
+        images?: T;
       };
   updatedAt?: T;
   createdAt?: T;
