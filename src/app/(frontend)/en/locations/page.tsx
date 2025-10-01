@@ -8,7 +8,7 @@ export default async function LocationsPageDE() {
 
   return (
     <>
-      <LocationIndex introData={intro} locationData={locations} locationH3="Visit Us" />
+      <LocationIndex introData={intro} locationData={locations} locationH3="Visit Us" locale="en" />
     </>
   )
 }

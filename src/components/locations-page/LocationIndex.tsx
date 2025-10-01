@@ -6,10 +6,12 @@ const LocationIndex = ({
   introData,
   locationData,
   locationH3,
+  locale,
 }: {
   introData: LocationsIndex
   locationData: Location[]
   locationH3: string
+  locale: string
 }) => {
   if (!introData.sections) return null
   const data = introData?.sections[0]
@@ -26,7 +28,7 @@ const LocationIndex = ({
           {data.paragraph1}
         </p>
 
-        <p className="  flex-wrap text-muted-foreground text-sm  xl:text-base leading-7 px-4">
+        <p className="flex-wrap text-muted-foreground text-sm  xl:text-base leading-7 px-4">
           {data.paragraph2}
         </p>
       </div>
@@ -45,7 +47,12 @@ const LocationIndex = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 padding">
             {locationData.map((location) => (
-              <Link href={`/en/locations/${location.id}`} key={location.id}>
+              <Link
+                href={
+                  locale === 'en' ? `/en/locations/${location.id}` : `/standorte/${location.id}`
+                }
+                key={location.id}
+              >
                 <div className="bg-white rounded-xl shadow-md items-stretch h-full">
                   <div className="rounded-t-xl overflow-hidden h-64 border  ">
                     <img

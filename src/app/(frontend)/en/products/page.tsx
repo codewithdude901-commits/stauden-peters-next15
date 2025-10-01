@@ -12,15 +12,15 @@ export default async function ProductsPage({
   const page = parseInt((await searchParams).page || '1', 10)
   const sanitizedPage = isNaN(page) || page < 1 ? 1 : page
 
-  const intro = await fetchGlobal<ProductsIndex>('productsIndex', 'de')
+  const intro = await fetchGlobal<ProductsIndex>('productsIndex', 'en')
   // const productData = await fetchCollection<Product>('products', 'de')
-  const productData = await fetchCollectionByCategory('products', 'de', category, page)
+  const productData = await fetchCollectionByCategory('products', 'en', category, page)
 
   console.log(productData)
   return (
     <>
       {/*@ts-expect-error */}
-      <ProductIndex introData={intro} productData={productData} locale="de" />
+      <ProductIndex introData={intro} productData={productData} locale="en" />
     </>
   )
 }

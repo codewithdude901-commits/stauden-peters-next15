@@ -1,9 +1,9 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import { Product, ProductsIndex } from '@/payload-types'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { ProductCard } from './ProcuctCard'
-import { Product, ProductCategory, ProductsIndex } from '@/payload-types'
 
 interface ProductDataProps {
   docs: Product[]
@@ -18,9 +18,11 @@ interface ProductDataProps {
 const ProductIndex = ({
   introData,
   productData,
+  locale,
 }: {
   introData: ProductsIndex
   productData: ProductDataProps
+  locale: string
 }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -95,7 +97,7 @@ const ProductIndex = ({
         ) : (
           <div className="grid grid-cols-1 gap-4 gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 w-full">
             {productData.docs.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} locale={locale} />
             ))}
           </div>
         )}

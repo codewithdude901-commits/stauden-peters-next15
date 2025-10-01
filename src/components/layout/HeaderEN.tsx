@@ -22,7 +22,7 @@ const HeaderEN = () => {
     <nav className={cn('fixed z-40 top-0 inset-x-0 bg-white shadow-lg')}>
       <div className="padding h-16 lg:h-[65px] flex items-center justify-between">
         <div>
-          <Link href={`/`}>
+          <Link href={`/en`}>
             <Icons.logo />
           </Link>
         </div>
@@ -31,8 +31,8 @@ const HeaderEN = () => {
         <div className="lg:flex divide-x hidden ">
           {MenuItemsEN.map((menu) => {
             const isActive =
-              menu.link === '/'
-                ? pathname === '/' // home only matches root
+              menu.link === '/en'
+                ? pathname === '/en' // home only matches root
                 : pathname.startsWith(menu.link) // others match prefix
 
             return (

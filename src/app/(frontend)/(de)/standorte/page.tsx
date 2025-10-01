@@ -8,7 +8,12 @@ export default async function LocationsPageDE() {
 
   return (
     <>
-      <LocationIndex introData={intro} locationData={locations} locationH3="Besuchen Sie uns" />
+      <LocationIndex
+        introData={intro}
+        locationData={locations}
+        locationH3="Besuchen Sie uns"
+        locale="de"
+      />
     </>
   )
 }
