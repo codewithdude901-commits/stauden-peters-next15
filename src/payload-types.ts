@@ -851,19 +851,6 @@ export interface Contact {
     linkedIn?: string | null;
     youtube?: string | null;
   };
-  formLabels?: {
-    fullName?: string | null;
-    email?: string | null;
-    phone?: string | null;
-    notes?: string | null;
-    submitButton?: string | null;
-  };
-  formErrors?: {
-    required?: string | null;
-    invalidEmail?: string | null;
-    invalidPhone?: string | null;
-  };
-  formSuccess?: string | null;
   formSettings: {
     toEmail: string;
     subjectPrefix?: string | null;
@@ -1157,23 +1144,6 @@ export interface ContactSelect<T extends boolean = true> {
         linkedIn?: T;
         youtube?: T;
       };
-  formLabels?:
-    | T
-    | {
-        fullName?: T;
-        email?: T;
-        phone?: T;
-        notes?: T;
-        submitButton?: T;
-      };
-  formErrors?:
-    | T
-    | {
-        required?: T;
-        invalidEmail?: T;
-        invalidPhone?: T;
-      };
-  formSuccess?: T;
   formSettings?:
     | T
     | {

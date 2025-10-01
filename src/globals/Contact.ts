@@ -41,40 +41,6 @@ export const Contact: GlobalConfig = {
       ],
     },
 
-    // Enquiry Form labels
-    {
-      name: 'formLabels',
-      type: 'group',
-      localized: true,
-      fields: [
-        { name: 'fullName', type: 'text', defaultValue: 'Full Name' },
-        { name: 'email', type: 'text', defaultValue: 'Email' },
-        { name: 'phone', type: 'text', defaultValue: 'Phone' },
-        { name: 'notes', type: 'text', defaultValue: 'Notes' },
-        { name: 'submitButton', type: 'text', defaultValue: 'Submit' },
-      ],
-    },
-
-    // Error messages
-    {
-      name: 'formErrors',
-      type: 'group',
-      localized: true,
-      fields: [
-        { name: 'required', type: 'text', defaultValue: 'This field is required' },
-        { name: 'invalidEmail', type: 'text', defaultValue: 'Invalid email address' },
-        { name: 'invalidPhone', type: 'text', defaultValue: 'Invalid phone number' },
-      ],
-    },
-
-    // Success message
-    {
-      name: 'formSuccess',
-      type: 'text',
-      localized: true,
-      defaultValue: 'Thanks! We will get back to you soon.',
-    },
-
     // Functional settings
     {
       name: 'formSettings',
