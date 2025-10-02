@@ -2,7 +2,7 @@ import { GlobalSlug } from '@/types/globals'
 
 export async function fetchGlobal<T>(slug: GlobalSlug, locale: 'de' | 'en'): Promise<T> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/globals/${slug}?locale=${locale}`,
+    `${process.env.VERCEL_URL}/api/globals/${slug}?locale=${locale}`,
     // { next: { revalidate: 60 } }
   )
 
@@ -16,7 +16,7 @@ export async function fetchGlobal<T>(slug: GlobalSlug, locale: 'de' | 'en'): Pro
 // src/lib/fetchFromCMS.ts
 export async function fetchCollection<T>(slug: string, locale: 'de' | 'en'): Promise<T[]> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${slug}?locale=${locale}&limit=25`,
+    `${process.env.VERCEL_URL}/api/${slug}?locale=${locale}&limit=25`,
     // { next: { revalidate: 60 } }
   )
 
@@ -33,7 +33,7 @@ export async function fetchCollectionByCategory<T>(
   page: number,
 ): Promise<T[]> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${slug}?locale=${locale}&limit=12&where[category.title][equals]=${encodeURIComponent(category)}&sort=createdAt&page=${page}`,
+    `${process.env.VERCEL_URL}/api/${slug}?locale=${locale}&limit=12&where[category.title][equals]=${encodeURIComponent(category)}&sort=createdAt&page=${page}`,
     // { next: { revalidate: 60 } }
   )
 
@@ -50,7 +50,7 @@ export async function fetchDocBySlug<T>(
   locale: 'de' | 'en',
 ): Promise<T | null> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${collection}?where[slug][equals]=${slug}&locale=${locale}`,
+    `${process.env.VERCEL_URL}/api/${collection}?where[slug][equals]=${slug}&locale=${locale}`,
     // { next: { revalidate: 60 } }
   )
 
@@ -72,7 +72,7 @@ export async function fetchDocBySlugWithLocales(
   const id = resolved.id
   // 2) fetch raw doc by id with depth=0 (no locale) so you get localized objects
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${collection}/${id}?depth=2&locale=*`,
+    `${process.env.VERCEL_URL}/api/${collection}/${id}?depth=2&locale=*`,
     // { next: { revalidate: 60 } }
   )
 
@@ -90,10 +90,9 @@ export async function fetchDocById<T>(
   locale: 'de' | 'en',
 ): Promise<T | null> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${collection}?where[id][equals]=${id}&locale=${locale}`,
+    `${process.env.VERCEL_URL}/api/${collection}?where[id][equals]=${id}&locale=${locale}`,
     // { next: { revalidate: 60 } }
   )
-
 
   if (!res.ok) throw new Error(`Failed to fetch doc by id: ${collection}`)
 
@@ -107,7 +106,7 @@ export async function fetchDocByCategory<T>(
   locale: 'de' | 'en',
 ): Promise<T | null> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/${collection}?where[category.title][equals]=${category}&locale=${locale}`,
+    `${process.env.VERCEL_URL}/api/${collection}?where[category.title][equals]=${category}&locale=${locale}`,
     // { next: { revalidate: 60 } }
   )
 
