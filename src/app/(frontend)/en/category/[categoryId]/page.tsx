@@ -10,6 +10,8 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
 
   const category = await fetchDocByCategory<Category>('categories', categoryId, 'en')
 
+  if (!category) return null
+
   const className = 'rounded-md max-h-[650px] overflow-hidden object-cover'
 
   return (
@@ -28,7 +30,7 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
 
       <div className="max-w-7xl mx-auto mt-10">
         <YouTubeThumbnailPlayer
-          videoId={category?.videoId!}
+          videoId={category.videoId!}
           autoplay
           loop
           mute
@@ -45,8 +47,8 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
         </p>
 
         <Image
-          src={(category?.image1 as Media).url!}
-          alt={category?.title!}
+          src={(category.image1 as Media).url!}
+          alt={category.title!}
           width={1500}
           height={1000}
           className={className}
@@ -59,8 +61,8 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
           {category?.paragraph3}
         </p>
         <Image
-          src={(category?.image2 as Media).url!}
-          alt={category?.title!}
+          src={(category.image2 as Media).url!}
+          alt={category.title!}
           width={1500}
           height={1000}
           className={className}

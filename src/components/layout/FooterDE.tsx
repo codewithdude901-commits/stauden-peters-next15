@@ -110,7 +110,7 @@ const FooterDE = async () => {
           </h4>
           <div className="flex justify-center items-center flex-col md:flex-row gap-4">
             <h4 className="text-white text-sm ">
-              <Link href="/" target="_blank">
+              <Link href="/privacy-policy" target="_blank">
                 Datenschutzrichtlinie
               </Link>
             </h4>

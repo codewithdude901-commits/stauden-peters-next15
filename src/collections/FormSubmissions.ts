@@ -19,16 +19,5 @@ export const FormSubmissions: CollectionConfig = {
     { name: 'email', type: 'email', required: true },
     { name: 'phone', type: 'text' },
     { name: 'notes', type: 'textarea' },
-    { name: 'locale', type: 'select', required: true, options: ['de', 'en'] },
-    { name: 'consent', type: 'checkbox', defaultValue: false },
-    {
-      name: 'meta',
-      type: 'group',
-      fields: [
-        { name: 'ip', type: 'text' },
-        { name: 'userAgent', type: 'text' },
-        { name: 'referer', type: 'text' },
-      ],
-    },
   ],
 }

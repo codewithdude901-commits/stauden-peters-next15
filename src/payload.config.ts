@@ -1,30 +1,29 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { s3Storage } from '@payloadcms/storage-s3'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
 import { buildConfig } from 'payload'
-import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { fileURLToPath } from 'url'
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { Categories } from './collections/Categories'
 import { FormSubmissions } from './collections/FormSubmissions'
-import { TeamMembers } from './collections/TeamMembers'
-import { ProductCategories } from './collections/ProductCategories'
 import { Locations } from './collections/Locations'
+import { Media } from './collections/Media'
+import { ProductCategories } from './collections/ProductCategories'
 import { Products } from './collections/Products'
 import { Projects } from './collections/Projects'
-import { Home } from './globals/Home'
+import { TeamMembers } from './collections/TeamMembers'
+import { Users } from './collections/Users'
 import { About } from './globals/About'
+import { Contact } from './globals/Contact'
+import { Home } from './globals/Home'
 import { LocationsIndex } from './globals/LocationsIndex'
+import { PrivacyPolicy } from './globals/PrivacyPolicy'
 import { ProductsIndex } from './globals/ProductsIndex'
 import { ProjectsIndex } from './globals/ProjectsIndex'
-import { Contact } from './globals/Contact'
-import { LegalImprint } from './globals/LegalImprint'
-import { PrivacyPolicy } from './globals/PrivacyPolicy'
-import { Categories } from './collections/Categories'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -54,7 +53,7 @@ export default buildConfig({
     ProductsIndex,
     ProjectsIndex,
     Contact,
-    LegalImprint,
+    // LegalImprint,
     PrivacyPolicy,
   ],
 

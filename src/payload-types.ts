@@ -105,7 +105,6 @@ export interface Config {
     productsIndex: ProductsIndex;
     projectsIndex: ProjectsIndex;
     contact: Contact;
-    legalImprint: LegalImprint;
     privacyPolicy: PrivacyPolicy;
   };
   globalsSelect: {
@@ -115,7 +114,6 @@ export interface Config {
     productsIndex: ProductsIndexSelect<false> | ProductsIndexSelect<true>;
     projectsIndex: ProjectsIndexSelect<false> | ProjectsIndexSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
-    legalImprint: LegalImprintSelect<false> | LegalImprintSelect<true>;
     privacyPolicy: PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
   };
   locale: 'de' | 'en';
@@ -319,13 +317,6 @@ export interface FormSubmission {
   email: string;
   phone?: string | null;
   notes?: string | null;
-  locale: 'de' | 'en';
-  consent?: boolean | null;
-  meta?: {
-    ip?: string | null;
-    userAgent?: string | null;
-    referer?: string | null;
-  };
   updatedAt: string;
   createdAt: string;
 }
@@ -584,15 +575,6 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
   email?: T;
   phone?: T;
   notes?: T;
-  locale?: T;
-  consent?: T;
-  meta?:
-    | T
-    | {
-        ip?: T;
-        userAgent?: T;
-        referer?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -855,24 +837,6 @@ export interface Contact {
     toEmail: string;
     subjectPrefix?: string | null;
   };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "legalImprint".
- */
-export interface LegalImprint {
-  id: string;
-  sections?:
-    | {
-        heading?: string | null;
-        paragraph: string;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'legalSection';
-      }[]
-    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1155,27 +1119,6 @@ export interface ContactSelect<T extends boolean = true> {
     | {
         toEmail?: T;
         subjectPrefix?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "legalImprint_select".
- */
-export interface LegalImprintSelect<T extends boolean = true> {
-  sections?:
-    | T
-    | {
-        legalSection?:
-          | T
-          | {
-              heading?: T;
-              paragraph?: T;
-              id?: T;
-              blockName?: T;
-            };
       };
   updatedAt?: T;
   createdAt?: T;

@@ -16,6 +16,7 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import { EnquiryFormSchemaEN, EnquiryFormSchemaDE, TEnquiryFormSchema } from '@/lib/validation'
+import { toast } from 'sonner'
 
 const EnquiryForm = ({ locale }: { locale: string }) => {
   const [isUploading, setIsUploading] = useState(false)
@@ -31,25 +32,38 @@ const EnquiryForm = ({ locale }: { locale: string }) => {
   })
 
   async function handleForm(data: TEnquiryFormSchema) {
-    setIsUploading(true)
+    try {
+      setIsUploading(true)
 
-    // const resp = await enquiry(data);
-    // if (resp.message && locale === "en") {
-    //   setSuccess(resp?.message);
-    // } else if (resp.message && locale === "de") {
-    //   setSuccess("Nachricht erfolgreich gesendet!");
-    // } else if (resp.error && locale === "en") {
-    //   setError(resp?.error);
-    // } else if (resp.error && locale === "de") {
-    //   setError("Sie haben Anfragen, die noch zu klären sind!");
-    // }
+      const payload = {
+        fullName: data.name ?? data.name ?? '',
+        email: data.email,
+        phone: data.telephone ?? '',
+        notes: data.message ?? '',
+        locale,
+        hp: '', // honeypot must be empty
+      }
 
-    setIsUploading(false)
-    // form.reset()
-    alert('form submitted!')
+      const res = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        throw new Error(body?.error || 'Submission failed')
+      }
+
+      form.reset()
+      toast.success(locale === 'en' ? 'Form submitted — thank you!' : 'Formular gesendet — danke!')
+    } catch (err: any) {
+      console.error(err)
+      toast.error(locale === 'en' ? `Error: ${err?.message}` : `Fehler: ${err?.message}`)
+    } finally {
+      setIsUploading(false)
+    }
   }
-
-  //   const form = locale === 'en' ? formEN : formDE
 
   return (
     <div className="">
