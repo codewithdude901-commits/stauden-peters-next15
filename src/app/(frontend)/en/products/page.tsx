@@ -16,7 +16,6 @@ export default async function ProductsPage({
   // const productData = await fetchCollection<Product>('products', 'de')
   const productData = await fetchCollectionByCategory('products', 'en', category, page)
 
-  console.log(productData)
   return (
     <>
       {/*@ts-expect-error */}

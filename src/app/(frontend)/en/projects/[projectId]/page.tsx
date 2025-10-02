@@ -5,7 +5,7 @@ import { Media, Project } from '@/payload-types'
 const ProjectDetailPage = async ({ params }: { params: Promise<{ projectId: string }> }) => {
   const projectId = (await params).projectId
   const project = await fetchDocById<Project>('projects', projectId, 'en')
-  console.log(project)
+
   if (!project) return null
 
   const className = 'rounded-md max-h-[650px] overflow-hidden'

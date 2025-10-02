@@ -40,7 +40,7 @@ export async function fetchCollectionByCategory<T>(
   if (!res.ok) throw new Error(`Failed to fetch collection: ${slug}`)
 
   const data = await res.json()
-  // console.log(data)
+
   return data as T[]
 }
 
@@ -94,7 +94,6 @@ export async function fetchDocById<T>(
     // { next: { revalidate: 60 } }
   )
 
-  // console.log('************res***************', res)
 
   if (!res.ok) throw new Error(`Failed to fetch doc by id: ${collection}`)
 

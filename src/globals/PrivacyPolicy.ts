@@ -15,10 +15,12 @@ export const PrivacyPolicy: GlobalConfig = {
     //     { name: 'ogImage', type: 'upload', relationTo: 'media' },
     //   ],
     // },
+
     {
-      name: 'sections',
-      type: 'blocks',
-      blocks: [LegalSection],
+      name: 'content',
+      type: 'richText',
+      required: true,
+      localized: true,
     },
   ],
 }

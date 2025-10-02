@@ -77,7 +77,7 @@ const Page = async () => {
                 {contactData.socials?.linkedIn && (
                   <Link
                     className="mx-1.5  transition-colors duration-150 transform hover:text-blue-600"
-                    href=""
+                    href={contactData.socials?.linkedIn}
                     target="_blank"
                   >
                     <FaLinkedinIn size={22} />
@@ -87,7 +87,7 @@ const Page = async () => {
                 {contactData.socials?.facebook && (
                   <Link
                     className="mx-1.5  transition-colors duration-300 transform hover:text-blue-600"
-                    href="https://www.facebook.com/share/19koHdj1Us/?mibextid=wwXIfr"
+                    href={contactData.socials?.facebook}
                     target="_blank"
                   >
                     <FaFacebookF size={20} />
@@ -97,7 +97,7 @@ const Page = async () => {
                 {contactData.socials?.instagram && (
                   <Link
                     className="mx-1.5 -400 transition-colors duration-300 transform hover:text-blue-600"
-                    href="https://www.instagram.com/stauden_peters?igsh=bnE5d3h6d2lqejBl"
+                    href={contactData.socials?.instagram}
                     target="_blank"
                   >
                     <AiFillInstagram size={24} />
@@ -107,7 +107,7 @@ const Page = async () => {
                 {contactData.socials?.youtube && (
                   <Link
                     className="mx-1.5 transition-colors duration-300 transform hover:text-blue-600"
-                    href=""
+                    href={contactData.socials?.youtube}
                     target="_blank"
                   >
                     <FaYoutube size={24} />

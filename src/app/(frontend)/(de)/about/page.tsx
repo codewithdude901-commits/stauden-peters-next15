@@ -7,7 +7,7 @@ import React from 'react'
 
 export default async function AboutPageDE() {
   const about = await fetchGlobal<About>('about', 'de')
-//   console.log(about)
+
   return (
     <div className="min-h-screen">
       {about.sections?.map((block: any, idx: number) => {

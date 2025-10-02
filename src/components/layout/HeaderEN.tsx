@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Icons } from './Icons'
 import LocaleSwitcher from './LocaleSwitcher'
 import MobileNavEN from './MobileNavEN'
+import LocaleSwitcherMobile from './LocaleSwitcherMobile'
 
 const MenuItemsEN = [
   { name: 'home', link: `/en` },
@@ -50,9 +51,12 @@ const HeaderEN = () => {
           })}
         </div>
 
-        <div>
-          <div className="hidden lg:flex">
+        <div className="flex gap-2 items-center">
+          {/* <div className="hidden lg:flex">
             <LocaleSwitcher />
+          </div> */}
+          <div>
+            <LocaleSwitcherMobile />
           </div>
           <div className="lg:hidden">
             <MobileNavEN />

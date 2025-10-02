@@ -1,3 +1,6 @@
+'use client'
+import { CustomImage } from '../CustomImage'
+
 interface Props {
   tagline: string
   headline: string
@@ -20,11 +23,14 @@ const AboutUs = ({ tagline, headline, paragraph, image }: Props) => {
       </div>
 
       {/* right side */}
-      <div className="w-full xl:w-1/2 h-auto 2xl:max-h-[550px]">
-        <img
-          className="w-full h-full rounded-xl object-cover"
+      <div className="w-full xl:w-1/2 h-ful 2xl:max-h-[550px] rounded-xl overflow-hidden">
+        <CustomImage
           src={image.url}
           alt={image.alt || 'photo'}
+          height="100%"
+          width="100%"
+          aspectRatio="3/2"
+          placeholderClass="skeleton-placeholder"
         />
       </div>
     </div>

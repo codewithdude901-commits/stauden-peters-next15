@@ -10,7 +10,7 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
   const productId = (await params).productId
 
   const product = await fetchDocById<Product>('products', productId, 'en')
-  console.log(product)
+
 
   if (!product) return null
   return (

@@ -1,3 +1,5 @@
+import CookieBannerDE from '@/components/layout/CookieBannerDE'
+import FooterDE from '@/components/layout/FooterDE'
 import HeaderDE from '@/components/layout/HeaderDE'
 import { Poppins } from 'next/font/google'
 import { Toaster } from 'sonner'
@@ -13,10 +15,11 @@ export default function LayoutDE({ children }: { children: React.ReactNode }) {
     <html>
       <body className={`${poppins.className} antialiased`}>
         <Toaster richColors />
+        <CookieBannerDE />
         <HeaderDE />
         {children}
         {/*  <GoTop /> */}
-        {/* <FooterDE /> */}
+        <FooterDE />
       </body>
     </html>
   )

@@ -32,7 +32,7 @@ const EnquiryForm = ({ locale }: { locale: string }) => {
 
   async function handleForm(data: TEnquiryFormSchema) {
     setIsUploading(true)
-    console.log(data)
+
     // const resp = await enquiry(data);
     // if (resp.message && locale === "en") {
     //   setSuccess(resp?.message);

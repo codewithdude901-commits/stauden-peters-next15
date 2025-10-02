@@ -14,7 +14,7 @@ interface TeamProps {
 }
 
 const Team = ({ tagline, headline, people }: TeamProps) => {
-  console.log(people)
+
   return (
     <section className="py-12 md:py-16 lg:py-24 padding">
       <div className=" ">

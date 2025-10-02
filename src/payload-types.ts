@@ -882,15 +882,21 @@ export interface LegalImprint {
  */
 export interface PrivacyPolicy {
   id: string;
-  sections?:
-    | {
-        heading?: string | null;
-        paragraph: string;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'legalSection';
-      }[]
-    | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1180,18 +1186,7 @@ export interface LegalImprintSelect<T extends boolean = true> {
  * via the `definition` "privacyPolicy_select".
  */
 export interface PrivacyPolicySelect<T extends boolean = true> {
-  sections?:
-    | T
-    | {
-        legalSection?:
-          | T
-          | {
-              heading?: T;
-              paragraph?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

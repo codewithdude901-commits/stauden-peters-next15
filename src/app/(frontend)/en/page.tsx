@@ -10,8 +10,6 @@ import Testimonials from '@/components/home-page/Testimonials'
 export default async function HomePageDE() {
   const home = await fetchGlobal<Home>('home', 'en')
 
-  // console.log(home)
-
   return (
     <main className="overflow-hidden flex flex-col mt-[65px]">
       {home.sections?.map((block: any, idx: number) => {

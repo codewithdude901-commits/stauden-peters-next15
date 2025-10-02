@@ -1,7 +1,10 @@
-import { Location, Media } from '@/payload-types'
+"use client"
+
+import { Media } from '@/payload-types'
+import { CustomImage } from '../CustomImage'
 
 const About = ({ location }: { location: any }) => {
-  // console.log(location)
+
   return (
     <div className="padding flex flex-col xl:flex-row gap-10 mt-10 lg:mt-16 py-12 md:py-16 lg:py-24 text-center xl:text-left w-full max-w-[2000px] mx-auto">
       {/* left */}
@@ -24,11 +27,15 @@ const About = ({ location }: { location: any }) => {
       </div>
 
       {/* right */}
-      <div className="w-full xl:w-1/2 h-auto">
-        <img
+     
+      <div className="w-full xl:w-1/2 2xl:max-h-[550px] rounded-xl overflow-hidden">
+        <CustomImage
           src={(location.featuredImage as Media).url!}
-          alt="location image"
-          className="w-full h-full rounded-xl object-cover"
+          alt={'location image'}
+          height="100%"
+          width="100%"
+          aspectRatio="3/2"
+          placeholderClass="skeleton-placeholder"
         />
       </div>
     </div>

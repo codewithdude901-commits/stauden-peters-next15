@@ -1,3 +1,5 @@
+import CookieBannerEN from '@/components/layout/CookieBannerEN'
+import FooterEN from '@/components/layout/FooterEN'
 import HeaderEN from '@/components/layout/HeaderEN'
 import { Poppins } from 'next/font/google'
 import { Toaster } from 'sonner'
@@ -13,8 +15,10 @@ export default function LayoutEN({ children }: { children: React.ReactNode }) {
     <html>
       <body className={`${poppins.className} antialiased`}>
         <Toaster richColors />
+        <CookieBannerEN />
         <HeaderEN />
         {children}
+        <FooterEN />
       </body>
     </html>
   )
