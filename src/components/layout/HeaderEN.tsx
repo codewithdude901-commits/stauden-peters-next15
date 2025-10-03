@@ -4,9 +4,8 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Icons } from './Icons'
-import LocaleSwitcher from './LocaleSwitcher'
-import MobileNavEN from './MobileNavEN'
 import LocaleSwitcherMobile from './LocaleSwitcherMobile'
+import MobileNavEN from './MobileNavEN'
 
 const MenuItemsEN = [
   { name: 'home', link: `/en` },
@@ -20,7 +19,7 @@ const MenuItemsEN = [
 const HeaderEN = () => {
   const pathname = usePathname()
   return (
-    <nav className={cn('fixed z-40 top-0 inset-x-0 bg-white shadow-lg')}>
+    <nav className={cn('fixed z-40 top-0 inset-x-0 bg-white shadow-sm')}>
       <div className="padding h-16 lg:h-[65px] flex items-center justify-between">
         <div>
           <Link href={`/en`}>

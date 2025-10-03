@@ -1,4 +1,4 @@
-import { fetchGlobal } from '@/lib/fetchFromCMS'
+import { fetchGlobal } from '@/lib/payloadClient'
 import { Contact } from '@/payload-types'
 import Link from 'next/link'
 import { AiFillInstagram } from 'react-icons/ai'
@@ -25,7 +25,7 @@ const itemsDe: ItemType[] = [
 ]
 
 const FooterDE = async () => {
-  const footerData = await fetchGlobal<Contact>('contact', 'de')
+  const footerData = await fetchGlobal<Contact>({ slug: 'contact', locale: 'de' })
 
   if (!footerData) return null
   return (

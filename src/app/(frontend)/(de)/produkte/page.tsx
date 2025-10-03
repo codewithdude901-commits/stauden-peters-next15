@@ -1,6 +1,7 @@
 // import ProductsPageContent from './ProductsPageContent'
 import ProductIndex from '@/components/products/ProductIndex'
-import { fetchCollectionByCategory, fetchGlobal } from '@/lib/fetchFromCMS'
+import { fetchCollectionByCategory, fetchGlobal } from '@/lib/payloadClient'
+
 import { ProductsIndex } from '@/payload-types'
 
 export default async function ProductsPage({
@@ -12,13 +13,16 @@ export default async function ProductsPage({
   const page = parseInt((await searchParams).page || '1', 10)
   const sanitizedPage = isNaN(page) || page < 1 ? 1 : page
 
-  const intro = await fetchGlobal<ProductsIndex>('productsIndex', 'de')
-  // const productData = await fetchCollection<Product>('products', 'de')
-  const productData = await fetchCollectionByCategory('products', 'de', category, page)
+  const intro = await fetchGlobal<ProductsIndex>({ slug: 'productsIndex', locale: 'de' })
+
+  const productData = await fetchCollectionByCategory('products', 'de', category, sanitizedPage)
+
+  if (!intro || !productData) {
+    return <div>Content loading...</div>
+  }
 
   return (
     <>
-      {/*@ts-expect-error */}
       <ProductIndex introData={intro} productData={productData} locale="de" />
     </>
   )

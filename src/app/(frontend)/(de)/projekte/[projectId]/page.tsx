@@ -1,10 +1,10 @@
 import Carousel from '@/components/Carousel'
-import { fetchDocById } from '@/lib/fetchFromCMS'
+import { fetchById } from '@/lib/payloadClient'
 import { Media, Project } from '@/payload-types'
 
 const ProjectDetailPage = async ({ params }: { params: Promise<{ projectId: string }> }) => {
   const projectId = (await params).projectId
-  const project = await fetchDocById<Project>('projects', projectId, 'de')
+  const project = await fetchById<Project>('projects', projectId, { locale: 'de' })
 
   if (!project) return null
 

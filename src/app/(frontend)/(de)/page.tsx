@@ -1,4 +1,3 @@
-import { fetchGlobal } from '@/lib/fetchFromCMS'
 import { Home } from '@/payload-types'
 import HeroSlider from '@/components/home-page/HeroSlider'
 import AboutBrief from '@/components/home-page/AboutBrief'
@@ -6,9 +5,14 @@ import Features from '@/components/home-page/Features'
 import Services from '@/components/home-page/Services'
 import VideoSection from '@/components/home-page/VideoSection'
 import Testimonials from '@/components/home-page/Testimonials'
+import { fetchGlobal } from '@/lib/payloadClient'
 
 export default async function HomePageDE() {
-  const home = await fetchGlobal<Home>('home', 'de')
+  const home = await fetchGlobal<Home>({ slug: 'home', locale: 'de' })
+
+  if (!home) {
+    return <div>Inhalt wird geladen...</div>
+  }
 
   return (
     <main className="overflow-hidden flex flex-col mt-[65px]">
@@ -46,7 +50,7 @@ export default async function HomePageDE() {
                 headline={block.headline}
                 paragraph={block.paragraph}
                 cards={block.cards}
-                locale={""}
+                locale={''}
               />
             )
 

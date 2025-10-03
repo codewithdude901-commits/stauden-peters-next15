@@ -1,12 +1,11 @@
 'use client'
 
-import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import MobileNavDE from './MobileNavDE'
 import { Icons } from './Icons'
-import LocaleSwitcher from './LocaleSwitcher'
 import LocaleSwitcherMobile from './LocaleSwitcherMobile'
+import MobileNavDE from './MobileNavDE'
 
 const MenuItemsDE = [
   { name: 'home', link: `/` },
@@ -20,7 +19,7 @@ const MenuItemsDE = [
 const HeaderDE = () => {
   const pathname = usePathname()
   return (
-    <nav className={cn('fixed z-40 top-0 inset-x-0 bg-white shadow-lg')}>
+    <nav className={cn('fixed z-40 top-0 inset-x-0 bg-white shadow-sm')}>
       <div className="padding h-16 lg:h-[65px] flex items-center justify-between">
         <div>
           <Link href={`/`}>

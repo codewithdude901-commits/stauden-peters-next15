@@ -1,5 +1,4 @@
 import { GlobalConfig } from 'payload'
-import { LegalSection } from '../blocks/LegalSection'
 
 export const PrivacyPolicy: GlobalConfig = {
   slug: 'privacyPolicy',

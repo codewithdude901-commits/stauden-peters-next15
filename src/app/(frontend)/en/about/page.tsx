@@ -1,13 +1,16 @@
 import AboutUs from '@/components/about-page/AboutUs'
 import MissionStory from '@/components/about-page/MissionStory'
 import Team from '@/components/about-page/Team'
-import { fetchGlobal } from '@/lib/fetchFromCMS'
+import { fetchGlobal } from '@/lib/payloadClient'
 import { About } from '@/payload-types'
-import React from 'react'
 
 export default async function AboutPageDE() {
-  const about = await fetchGlobal<About>('about', 'en')
+  const about = await fetchGlobal<About>({ slug: 'about', locale: 'en' })
 
+  if (!about) {
+    return <div>Content loading...</div>
+  }
+  
   return (
     <div className="min-h-screen">
       {about.sections?.map((block: any, idx: number) => {

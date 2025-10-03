@@ -11,8 +11,6 @@ interface ProductDataProps {
   totalDocs: number
   limit: number
   page: number
-  hasPrevPage: boolean
-  hasNextPage: boolean
 }
 
 const ProductIndex = ({
@@ -33,7 +31,7 @@ const ProductIndex = ({
 
   const [selectedCategories, setSelectedCategories] = useState<string>(initialCategory)
   const [currentPage, setCurrentPage] = useState<number>(initialPage)
-  const itemsPerPage = 12
+  // const itemsPerPage = 12
 
   // Update URL when state changes
   useEffect(() => {

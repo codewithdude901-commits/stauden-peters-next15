@@ -1,5 +1,5 @@
 import EnquiryForm from '@/components/EnquiryForm'
-import { fetchGlobal } from '@/lib/fetchFromCMS'
+import { fetchGlobal } from '@/lib/payloadClient'
 import { Contact } from '@/payload-types'
 import Link from 'next/link'
 
@@ -9,7 +9,7 @@ import { FaLocationDot } from 'react-icons/fa6'
 import { IoMdMail } from 'react-icons/io'
 
 const Page = async () => {
-  const contactData = await fetchGlobal<Contact>('contact', 'de')
+  const contactData = await fetchGlobal<Contact>({ slug: 'contact', locale: 'de' })
 
   if (!contactData) return null
 
@@ -123,7 +123,7 @@ const Page = async () => {
           </div>
 
           {/* right section */}
-          <div className="w-full px-4 py-10 sm:px-8 mx-auto rounded-lg shadow-2xl max-w-4xl shadow-gray-300/50">
+          <div className="w-full px-4 py-10 sm:px-8 mx-auto rounded-lg shadow-2xl max-w-4xl shadow-gray-300/20">
             <h6 className="font-semibold pb-4 text-blue-900 text-center">
               Was möchten Sie fragen?
             </h6>

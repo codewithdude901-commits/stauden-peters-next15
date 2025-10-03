@@ -1,13 +1,14 @@
 import ProjectCard from '@/components/projects/ProjectCard'
-import { fetchCollection, fetchGlobal } from '@/lib/fetchFromCMS'
+import { fetchCollection, fetchGlobal } from '@/lib/payloadClient'
+
 
 import { Media, Project, ProjectsIndex } from '@/payload-types'
 
 export default async function Projects() {
-  const intro = await fetchGlobal<ProjectsIndex>('projectsIndex', 'en')
-  const projectData = await fetchCollection<Project>('projects', 'en')
-
-  if (!intro.sections || !projectData) return null
+   const intro = await fetchGlobal<ProjectsIndex>({ slug: 'projectsIndex', locale: 'en' })
+   const projectData = await fetchCollection<Project>('projects', { locale: 'en' })
+ 
+   if (!intro?.sections || !projectData) return null
 
   return (
     <div>

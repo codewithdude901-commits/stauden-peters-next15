@@ -1,15 +1,15 @@
 import Image from 'next/image'
 
-import { RxHeight, RxWidth } from 'react-icons/rx'
-import { PiSnowflakeThin } from 'react-icons/pi'
-import { IoSunnyOutline } from 'react-icons/io5'
-import { fetchDocById } from '@/lib/fetchFromCMS'
 import { Media, Product } from '@/payload-types'
+import { IoSunnyOutline } from 'react-icons/io5'
+import { PiSnowflakeThin } from 'react-icons/pi'
+import { RxHeight, RxWidth } from 'react-icons/rx'
+import { fetchById } from '@/lib/payloadClient'
 
 const ProductDetailPage = async ({ params }: { params: Promise<{ productId: string }> }) => {
   const productId = (await params).productId
 
-  const product = await fetchDocById<Product>('products', productId, 'de')
+  const product = await fetchById<Product>('products', productId, { locale: 'de' })
 
   if (!product) return null
   return (

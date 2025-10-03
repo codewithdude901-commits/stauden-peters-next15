@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
+import { createDoc } from '@/lib/payloadClient' // <-- import our reusable fn
 
 // zod schema — match your collection fields
 const EnquirySchema = z.object({
@@ -30,38 +31,23 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true }, { status: 200 })
     }
 
-    const PAYLOAD_URL = process.env.NEXT_PUBLIC_SITE_URL
-    const PAYLOAD_TOKEN = process.env.PAYLOAD_SECRET
-
-    if (!PAYLOAD_URL || !PAYLOAD_TOKEN) {
-      return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 })
-    }
-
     // Map incoming data -> Payload collection fields
     const payloadBody = {
       fullName: data.fullName,
       email: data.email,
       phone: data.phone ?? '',
       notes: data.notes,
+      locale: data.locale ?? 'en',
     }
 
-    const res = await fetch(`${PAYLOAD_URL}/api/formSubmissions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${PAYLOAD_TOKEN}`,
-      },
-      body: JSON.stringify(payloadBody),
-    })
+    // Use our reusable Payload helper
+    const created = await createDoc('formSubmissions', payloadBody)
 
-    const payloadResponse = await res.json().catch(() => null)
-
-    if (!res.ok) {
-      console.error('Payload creation failed', res.status, payloadResponse)
+    if (!created) {
       return NextResponse.json({ error: 'Failed to save submission' }, { status: 500 })
     }
 
-    return NextResponse.json({ ok: true, data: payloadResponse }, { status: 201 })
+    return NextResponse.json({ ok: true, data: created }, { status: 201 })
   } catch (err: any) {
     console.error(err)
     return NextResponse.json({ error: err?.message ?? 'Unknown error' }, { status: 500 })

@@ -1,5 +1,6 @@
 import YouTubeThumbnailPlayer from '@/components/YouTubeThumbnailPlayer'
-import { fetchDocByCategory } from '@/lib/fetchFromCMS'
+import { fetchDocByCategory } from '@/lib/payloadClient'
+
 import { Category, Media } from '@/payload-types'
 import { MoveUpRight } from 'lucide-react'
 import Image from 'next/image'

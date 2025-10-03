@@ -1,4 +1,4 @@
-import { fetchGlobal } from '@/lib/fetchFromCMS'
+import { fetchGlobal } from '@/lib/payloadClient'
 import { Contact } from '@/payload-types'
 import Link from 'next/link'
 
@@ -23,7 +23,7 @@ const itemEn: ItemType[] = [
 ]
 
 const FooterEN = async () => {
-  const footerData = await fetchGlobal<Contact>('contact', 'en')
+  const footerData = await fetchGlobal<Contact>({ slug: 'contact', locale: 'en' })
 
   if (!footerData) return null
 

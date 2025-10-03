@@ -1,10 +1,10 @@
-import { fetchGlobal } from '@/lib/fetchFromCMS'
 import { PrivacyPolicy } from '@/payload-types'
 
 import RichTextHtml from '@/components/RichText'
+import { fetchGlobal } from '@/lib/payloadClient'
 
 const PrivacyPolicyPage = async () => {
-  const privacyPolicy = await fetchGlobal<PrivacyPolicy>('privacyPolicy', 'en')
+  const privacyPolicy = await fetchGlobal<PrivacyPolicy>({ slug: 'privacyPolicy', locale: 'en' })
 
   if (!privacyPolicy) return null
 
