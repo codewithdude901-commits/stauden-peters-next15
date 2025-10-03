@@ -85,7 +85,7 @@ export const CustomImage = ({
         }}
         onLoad={handleLoad}
         onError={handleError}
-        loading="lazy"
+        // loading="lazy"
       />
     </div>
   )

@@ -7,6 +7,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 interface CarouselProps {
   slides: any
@@ -54,11 +55,15 @@ const Carousel = ({
         {imagesToRender.map((slide: { url: string; alt: string }, index: number) => (
           <SwiperSlide key={index}>
             <div>
-              <img
+              <Image
                 src={slide.url}
                 alt={slide.alt}
+                priority
+                width={1920}
+                height={1080}
                 className="block h-screen max-h-[calc(100vh-65px)] w-screen object-cover sm:object-left-top"
-                loading="lazy"
+                placeholder="blur"
+                blurDataURL="/placeholder.jpg"
               />
             </div>
           </SwiperSlide>

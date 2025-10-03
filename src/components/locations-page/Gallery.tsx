@@ -3,9 +3,8 @@ import Carousel from '../Carousel'
 import { Media } from '@/payload-types'
 
 const Gallery = ({ galleryData, locale }: { galleryData: (string | Media)[]; locale: string }) => {
-
   const slidePerView = 1
-  const className = 'h-auto md:h-[400px] rounded-xl'
+  const className = 'h-auto rounded-xl'
   if (galleryData?.length === 0) return null
   return (
     <section className="bg-yellow-50/50 py-12 md:py-16 lg:py-24 padding">
@@ -21,8 +20,8 @@ const Gallery = ({ galleryData, locale }: { galleryData: (string | Media)[]; loc
         slidesPerView={slidePerView}
         spaceBetween={5}
         breakpoints={{
-          768: { slidesPerView: 2 },
-          1280: { slidesPerView: 3 },
+          1024: { slidesPerView: 2 },
+
         }}
       />
     </section>

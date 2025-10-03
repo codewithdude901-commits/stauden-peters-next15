@@ -5,7 +5,7 @@ const ManagerPhoto = ({ data, locale }: { data: Location; locale: string }) => {
 
   return (
     <div className="pb-12 md:pb-16 lg:pb-24 w-fit padding">
-      <div className="flex flex-row gap-10">
+      <div className="flex flex-row gap-4">
         {data.managers.map((manager) => (
           <div className="flex flex-col" key={manager.name}>
             <div className="aspect-square w-32 xl:w-36 overflow-hidden rounded-md">

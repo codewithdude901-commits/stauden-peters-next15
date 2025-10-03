@@ -1,6 +1,7 @@
 import React from 'react'
 import type { LocationsIndex, Media, Location } from '@/payload-types'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const LocationIndex = ({
   introData,
@@ -34,9 +35,14 @@ const LocationIndex = ({
       </div>
       {/* image */}
       <div className="h-auto max-h-[670px] max-w-7xl rounded-2xl flex justify-center self-center overflow-hidden mb-12 md:mb-20 mx-4">
-        <img
+        <Image
           src={(data.image as Media).url!}
           alt="locations image"
+          priority
+          width={1920}
+          height={1080}
+          placeholder="blur"
+          blurDataURL="/placeholder.jpg"
           className="rounded-2xl h-full w-full object-cover"
         />
       </div>
@@ -55,10 +61,15 @@ const LocationIndex = ({
               >
                 <div className="bg-white rounded-xl shadow-md items-stretch h-full">
                   <div className="rounded-t-xl overflow-hidden h-64 border  ">
-                    <img
+                    <Image
                       src={(location.thumbnail as Media).url!}
                       alt="location"
                       className="hover:scale-[103%] h-full w-full object-cover transition-transform duration-300 "
+                      priority
+                      width={1920}
+                      height={1080}
+                      placeholder="blur"
+                      blurDataURL="/placeholder.jpg"
                     />
                   </div>
                   <div className="p-4">

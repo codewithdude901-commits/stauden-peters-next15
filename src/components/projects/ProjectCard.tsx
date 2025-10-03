@@ -1,7 +1,7 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
-import { CustomImage } from '../CustomImage'
 
 interface Props {
   title: string
@@ -17,17 +17,16 @@ export default function ProjectCard({ title, category, image, id, locale }: Prop
     <Link href={locale === 'en' ? `/en/projects/${id}` : `/projekte/${id}`}>
       <div className="bg-white rounded-xl shadow-md">
         <div className="rounded-t-xl overflow-hidden h-64">
-          {/* <img
+     
+          <Image
             src={image}
             alt={title}
-            className="hover:scale-[103%] object-cover transition-transform duration-300 h-full w-full"
-          /> */}
-          <CustomImage
-            src={image}
-            alt={title}
-            width="100%"
-            height="100%"
-            placeholderClass="skeleton-placeholder"
+            priority
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover object-top "
+            placeholder="blur"
+          blurDataURL="/placeholder.jpg"
           />
         </div>
 

@@ -1,12 +1,12 @@
 'use client'
 
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 
+import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { CustomImage } from './CustomImage'
 
 interface CarouselProps {
   slides: string[]
@@ -43,22 +43,16 @@ const Carousel = ({
         >
           {slides.map((image, index) => (
             <SwiperSlide key={index}>
-              <div className={`max-h-[650px]  w-full h-full items-center justify-center`}>
-                {/* <img
-                  src={image}
-                  alt="slider image"
-                  className="block h-full w-full object-cover"
-                  width={1200}
-                  height={800}
-                /> */}
-
-                <CustomImage
+              <div className={`max-h-[650px] w-full h-full items-center justify-center`}>
+                <Image
                   src={image}
                   alt={'slider image'}
-                  width="100%"
-                  // height="100%"
-                  placeholderClass="skeleton-placeholder"
-                  aspectRatio="3/2"
+                  priority
+                  width={1920}
+                  height={1080}
+                  placeholder="blur"
+                  blurDataURL="/placeholder.jpg"
+                  className="h-full object-cover"
                 />
               </div>
             </SwiperSlide>

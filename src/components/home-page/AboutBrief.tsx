@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 interface Props {
   tagline: string
   headline: string
@@ -34,11 +36,16 @@ const AboutBrief = ({ tagline, headline, paragraph1, paragraph2, image }: Props)
         </div>
 
         {/* right side */}
-        <div className="w-full xl:w-1/2 h-auto max-h-[500px]">
-          <img
-            className="w-full h-full rounded-xl object-cover xl:object-left-top"
+        <div className="w-full xl:w-1/2 h-auto max-h-[500px] overflow-hidden rounded-xl">
+          <Image
             src={image.url}
             alt={image?.alt || 'hero-story-photo'}
+            priority
+            width={1920}
+            height={1080}
+            className="w-full h-full rounded-xl object-cover xl:object-left-top "
+            placeholder="blur"
+            blurDataURL="/placeholder.jpg"
           />
         </div>
       </div>

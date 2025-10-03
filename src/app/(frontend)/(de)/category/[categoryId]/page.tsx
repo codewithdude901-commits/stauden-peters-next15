@@ -1,6 +1,6 @@
 import YouTubeThumbnailPlayer from '@/components/YouTubeThumbnailPlayer'
 import { fetchDocByCategory } from '@/lib/payloadClient'
-import { Category, Media } from '@/payload-types'
+import { Category, Media, ProductCategory } from '@/payload-types'
 import { MoveUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -69,7 +69,7 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
           objectFit="cover"
         />
         <Link
-          href={`/products?category=${category.category}&page=1`}
+          href={`/produkte?category=${(category.category as ProductCategory).title}&page=1`}
           className="flex gap-2 items-center text-white hover:bg-blue-400 w-fit bg-blue-500 py-2 px-5 rounded-md mx-auto transition duration-100 ease-in"
         >
           <p className="inline">{category.buttonText}</p>

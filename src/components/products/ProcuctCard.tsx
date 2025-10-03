@@ -1,6 +1,7 @@
 import { Media, Product } from '@/payload-types'
 import Link from 'next/link'
-import { CustomImage } from '../CustomImage'
+
+import Image from 'next/image'
 
 type ProductCardProps = {
   product: Product
@@ -14,12 +15,16 @@ export const ProductCard = ({ product, locale }: ProductCardProps) => {
     <Link href={locale === 'en' ? `/en/products/${product.id}` : `/produkte/${product.id}`}>
       <div className="bg-white rounded-sm shadow-md hover:shadow-lg transition-shadow max-w-[320px] w-full mx-auto">
         <div className="relative h-72 rounded-t-sm overflow-hidden">
-          <CustomImage
+        
+          <Image
             src={imageSrc}
             alt={product.name}
-            width="100%"
-            height="100%"
-            placeholderClass="skeleton-placeholder"
+            priority
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover object-top "
+            placeholder="blur"
+        blurDataURL="/placeholder.jpg"
           />
         </div>
 

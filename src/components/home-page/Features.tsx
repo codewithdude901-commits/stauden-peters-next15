@@ -37,7 +37,7 @@ const Features = ({ tagline, headline, paragraph, cards, locale }: Props) => {
           {/* right section */}
           <div className="flex gap-4 justify-center flex-col lg:flex-row text-justify">
             <Link
-              href={locale === 'en' && '/en/category/elegrass' || '/category/elegrass'}
+              href={(locale === 'en' && '/en/category/elegrass') || '/category/elegrass'}
               className="max-w-[400px] mx-auto
              bg-white flex flex-col gap-2 p-4 md:p-6 pb-2  rounded-lg transition-all ease-linear duration-300 shadow-lg hover:scale-[101%] "
             >
@@ -54,12 +54,12 @@ const Features = ({ tagline, headline, paragraph, cards, locale }: Props) => {
                   alt={cards[0].image.alt || 'category-photo'}
                 />
               </div>
-              <p className="mb-2 text-muted-foreground text-sm leading-7 xl:text-base ">
+              <p className="mb-2 text-muted-foreground text-sm leading-7 xl:text-base">
                 {cards[0].text}
               </p>
             </Link>
             <Link
-             href={locale === 'en' && '/en/category/elegardens' || '/category/elegardens'}
+              href={(locale === 'en' && '/en/category/elegardens') || '/category/elegardens'}
               className="max-w-[400px] mx-auto
              bg-white flex flex-col gap-2 p-4 md:p-6 pb-2  rounded-lg transition-all ease-linear duration-300 shadow-lg hover:scale-[101%]"
             >
@@ -82,7 +82,7 @@ const Features = ({ tagline, headline, paragraph, cards, locale }: Props) => {
               </p>
             </Link>
             <Link
-            href={locale === 'en' && '/en/category/elerose' || '/category/elerose'}
+              href={(locale === 'en' && '/en/category/elerose') || '/category/elerose'}
               className="max-w-[400px] mx-auto
              bg-white flex flex-col gap-2 p-4 md:p-6 pb-2  rounded-lg transition-all ease-linear duration-300 shadow-lg hover:scale-[101%] "
             >

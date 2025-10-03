@@ -24,7 +24,6 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
               <Image
                 src={(product.gallery.image[0] as Media).url!}
                 alt={product.name}
-                // layout="fill"
                 width={800}
                 height={800}
                 className=" object-contain w-full h-full"
