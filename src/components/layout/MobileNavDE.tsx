@@ -1,7 +1,7 @@
 'use client'
 import { Menu, X } from 'lucide-react'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-transition-progress/next'
 import LocaleSwitcher from './LocaleSwitcher'
@@ -101,7 +101,9 @@ const MobileNavDE = () => {
                     </Link>
                   </motion.div>
                 ))}
-                <LocaleSwitcher />
+            <Suspense fallback={<div className="w-24 h-10 bg-gray-200 animate-pulse rounded" />}>
+              <LocaleSwitcher />
+            </Suspense>
               </motion.div>
             </motion.div>
           </>

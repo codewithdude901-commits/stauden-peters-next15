@@ -2,7 +2,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import LocaleSwitcher from './LocaleSwitcher'
 import { Link } from 'react-transition-progress/next'
 
@@ -102,7 +102,11 @@ const MobileNavEN = () => {
                   </motion.div>
                 ))}
 
-                <LocaleSwitcher />
+                <Suspense
+                  fallback={<div className="w-24 h-10 bg-gray-200 animate-pulse rounded" />}
+                >
+                  <LocaleSwitcher />
+                </Suspense>
               </motion.div>
             </motion.div>
           </>

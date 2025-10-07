@@ -6,6 +6,7 @@ import { Link } from 'react-transition-progress/next'
 import { Icons } from './Icons'
 import LocaleSwitcher from './LocaleSwitcher'
 import MobileNavDE from './MobileNavDE'
+import { Suspense } from 'react'
 
 const MenuItemsDE = [
   { name: 'home', link: `/` },
@@ -52,7 +53,9 @@ const HeaderDE = () => {
 
         <div className="flex gap-2 items-center">
           <div className="hidden lg:flex">
-            <LocaleSwitcher />
+            <Suspense fallback={<div className="w-24 h-10 bg-gray-200 animate-pulse rounded" />}>
+              <LocaleSwitcher />
+            </Suspense>
           </div>
 
           <div className="lg:hidden">
