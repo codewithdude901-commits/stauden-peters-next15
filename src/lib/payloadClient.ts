@@ -1,7 +1,6 @@
 // src/lib/payloadClient.ts
-import { CollectionSlug, getPayload, GlobalSlug } from 'payload'
 import config from '@payload-config'
-import { ProductCategory } from '@/payload-types'
+import { CollectionSlug, getPayload, GlobalSlug } from 'payload'
 
 /**
  * Use Awaited<> here so _payload is the resolved payload instance (BasePayload),

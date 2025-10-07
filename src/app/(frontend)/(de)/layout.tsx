@@ -21,6 +21,9 @@ export const metadata = {
 export default function LayoutDE({ children }: { children: React.ReactNode }) {
   return (
     <html>
+        <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={`${poppins.className} antialiased`}>
         <ProgressBarProvider>
           <ProgressBar className="fixed h-1 shadow-lg shadow-sky-500/20 bg-sky-500 top-0 z-50" />

@@ -1,7 +1,7 @@
 import type { Location, LocationsIndex, Media } from '@/payload-types'
 
 import BlurImage from '../BlurImage'
-import { placeholderBlurhash } from '@/lib/utils'
+
 import { Link } from 'react-transition-progress/next'
 
 const LocationIndex = ({
@@ -42,8 +42,6 @@ const LocationIndex = ({
           priority
           width={1920}
           height={1080}
-          placeholder="blur"
-          blurDataURL={placeholderBlurhash}
           className="rounded-2xl h-full w-full object-cover min-h-72"
         />
       </div>

@@ -2,7 +2,8 @@
 
 import { Product, ProductsIndex } from '@/payload-types'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { startTransition, useEffect, useState } from 'react'
+import { useProgress } from 'react-transition-progress'
 import { ProductCard } from './ProcuctCard'
 
 interface ProductDataProps {
@@ -31,6 +32,8 @@ const ProductIndex = ({
 
   const [selectedCategories, setSelectedCategories] = useState<string>(initialCategory)
   const [currentPage, setCurrentPage] = useState<number>(initialPage)
+
+  const startProgress = useProgress()
   // const itemsPerPage = 12
 
   // Update URL when state changes
@@ -42,10 +45,15 @@ const ProductIndex = ({
   }, [selectedCategories, currentPage, router])
 
   const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= productData.totalPages) {
-      setCurrentPage(page)
-      window.scrollTo({ top: 0, behavior: 'smooth'})
-    }
+    startTransition(() => {
+      // start visual progress
+      startProgress()
+
+      if (page >= 1 && page <= productData.totalPages) {
+        setCurrentPage(page)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    })
   }
 
   return (
@@ -72,6 +80,10 @@ const ProductIndex = ({
               onClick={() => {
                 setSelectedCategories(cat)
                 setCurrentPage(1)
+                startTransition(() => {
+                  // start visual progress
+                  startProgress()
+                })
               }}
               className={selectedCategories === cat ? 'border-b-2 border-gray-400' : ''}
             >

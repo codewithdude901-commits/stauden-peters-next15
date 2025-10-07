@@ -35,7 +35,7 @@ const CarouselLoc = ({ slides, className, breakpoints, spaceBetween }: CarouselP
           className={className}
         >
           {slides.map((image, index) => (
-            <SwiperSlide key={index} className="max-h-[600px] overflow-hidden">
+            <SwiperSlide key={index} className="max-h-[600px] overflow-hidden rounded-xl">
               <Image
                 src={image}
                 alt={'slider image'}
@@ -44,7 +44,7 @@ const CarouselLoc = ({ slides, className, breakpoints, spaceBetween }: CarouselP
                 height={1080}
                 placeholder="blur"
                 blurDataURL="/placeholder.jpg"
-                className="object-cover"
+                className="object-cover "
               />
             </SwiperSlide>
           ))}

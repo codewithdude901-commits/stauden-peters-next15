@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Check, ChevronDown, Globe } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { startTransition, useMemo } from 'react'
 import { useProgress } from 'react-transition-progress'
 
@@ -50,6 +50,7 @@ function mapPathToLocale(pathname: string, targetLocale: Locale): string {
 export default function LocaleSwitcher() {
   const router = useRouter()
   const pathname = usePathname() ?? '/'
+  const searchParams = useSearchParams()
   const isEnglish = pathname.startsWith('/en')
   const currentLocale: Locale = isEnglish ? 'en' : 'de'
 
@@ -62,7 +63,9 @@ export default function LocaleSwitcher() {
 
   const handleSwitch = (locale: Locale) => {
     if (locale === currentLocale) return
-    const target = mapPathToLocale(pathname, locale)
+    const targetPath = mapPathToLocale(pathname, locale)
+    const queryString = searchParams.toString()
+    const target = queryString ? `${targetPath}?${queryString}` : targetPath
 
     startTransition(() => {
       // start visual progress
