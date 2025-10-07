@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'stauden-peters-de.s3.eu-central-1.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'd3r57ia6anwehl.cloudfront.net', 
+      },
     ],
   },
 }

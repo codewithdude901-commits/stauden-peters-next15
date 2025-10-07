@@ -71,7 +71,7 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
         />
         <Link
           href={`/en/products?category=${(category.category as ProductCategory).title}&page=1`}
-          className="flex gap-2 items-center text-white hover:bg-blue-400 w-fit bg-blue-500 py-2 px-5 rounded-md mx-auto transition duration-100 ease-in"
+          className="flex gap-2 items-center text-white hover:bg-blue-400 w-fit bg-blue-500 py-2 px-5 rounded-md mx-auto transition duration-100 ease-in mt-4"
         >
           <p className="inline">{category?.buttonText}</p>
           <MoveUpRight size={16} />

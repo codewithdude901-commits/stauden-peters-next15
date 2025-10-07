@@ -1,13 +1,13 @@
 'use client'
 
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 
+import { useEffect, useState } from 'react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
+import BlurImage from '../BlurImage'
 
 interface CarouselProps {
   slides: any
@@ -55,15 +55,15 @@ const Carousel = ({
         {imagesToRender.map((slide: { url: string; alt: string }, index: number) => (
           <SwiperSlide key={index}>
             <div>
-              <Image
+              <BlurImage
                 src={slide.url}
                 alt={slide.alt}
                 priority
                 width={1920}
                 height={1080}
                 className="block h-screen max-h-[calc(100vh-65px)] w-screen object-cover sm:object-left-top"
-                placeholder="blur"
-                blurDataURL="/placeholder.jpg"
+                // placeholder="blur"
+                // blurDataURL={placeholderBlurhash}
               />
             </div>
           </SwiperSlide>

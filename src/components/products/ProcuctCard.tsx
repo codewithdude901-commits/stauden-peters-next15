@@ -1,5 +1,5 @@
 import { Media, Product } from '@/payload-types'
-import Link from 'next/link'
+import { Link } from 'react-transition-progress/next'
 
 import Image from 'next/image'
 
@@ -15,7 +15,6 @@ export const ProductCard = ({ product, locale }: ProductCardProps) => {
     <Link href={locale === 'en' ? `/en/products/${product.id}` : `/produkte/${product.id}`}>
       <div className="bg-white rounded-sm shadow-md hover:shadow-lg transition-shadow max-w-[320px] w-full mx-auto">
         <div className="relative h-72 rounded-t-sm overflow-hidden">
-        
           <Image
             src={imageSrc}
             alt={product.name}
@@ -24,7 +23,7 @@ export const ProductCard = ({ product, locale }: ProductCardProps) => {
             height={1080}
             className="w-full h-full object-cover object-top "
             placeholder="blur"
-        blurDataURL="/placeholder.jpg"
+            blurDataURL="/placeholder.jpg"
           />
         </div>
 

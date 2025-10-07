@@ -62,7 +62,7 @@ const YouTubeThumbnailPlayer: React.FC<YouTubeThumbnailPlayerProps> = ({
             height={1080}
             className="absolute top-0 left-0 w-full h-full object-cover"
             placeholder="blur"
-             blurDataURL="/placeholder.jpg"
+            blurDataURL="/placeholder.jpg"
           />
           {/* Play Button Overlay */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/20">

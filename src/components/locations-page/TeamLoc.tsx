@@ -1,6 +1,5 @@
-import React from 'react'
-import Image from 'next/image'
 import { Media } from '@/payload-types'
+import Image from 'next/image'
 
 const TeamLoc = ({ team, locale }: { team: Media | string; locale: string }) => {
   return (
@@ -19,15 +18,18 @@ const TeamLoc = ({ team, locale }: { team: Media | string; locale: string }) => 
         </div>
 
         {/* team Photos */}
-
-        <Image
-          src={(team as Media).url!}
-          alt="team image"
-          width={3000}
-          height={2000}
-          objectFit="cover"
-          className="rounded-xl w-full h-auto max-h-[700px] overflow-hidden mx-auto object-cover"
-        />
+        <div className="w-full overflow-hidden rounded-xl">
+          <Image
+            src={(team as Media).url!}
+            alt="team image"
+            width={1920}
+            height={1080}
+            objectFit="cover"
+            className="rounded-xl w-full h-auto max-h-[700px] overflow-hidden mx-auto object-cover"
+            placeholder="blur"
+            blurDataURL="/placeholder.jpg"
+          />
+        </div>
       </div>
     </section>
   )

@@ -1,3 +1,4 @@
+import { postRevalidate } from '@/lib/postRevalidate'
 import { CollectionConfig } from 'payload'
 
 export const Projects: CollectionConfig = {
@@ -9,6 +10,16 @@ export const Projects: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'tag', 'location'],
   },
+
+   hooks: {
+        afterChange: [
+          async ({ doc }) => {
+            const paths = ['/projekte', '/en/projects', `/projekte/${doc.id}`, `/en/projects/${doc.id}`]
+            await postRevalidate(paths)
+            return doc
+          },
+        ],
+      },
   fields: [
     // Identity
     {

@@ -1,11 +1,30 @@
+import BlurImage from '@/components/BlurImage'
 import YouTubeThumbnailPlayer from '@/components/YouTubeThumbnailPlayer'
-import { fetchDocByCategory } from '@/lib/payloadClient'
+import { fetchDocByCategory, getCachedPayload } from '@/lib/payloadClient'
 import { Category, Media, ProductCategory } from '@/payload-types'
 import { MoveUpRight } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 
-const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: string }> }) => {
+type Params = { categoryId: string }
+
+export async function generateStaticParams() {
+  const payload = await getCachedPayload()
+
+  // Fetch all categories (only the fields we need)
+  const res = await payload.find({
+    collection: 'productCategories',
+    select: { title: true },
+  })
+
+  // Map to params
+  const params = res.docs.map((category) => ({
+    categoryId: category.title,
+  }))
+
+  return params
+}
+
+const CategoryDetailPage = async ({ params }: { params: Params }) => {
   const categoryId = (await params).categoryId
 
   const category = await fetchDocByCategory<Category>('categories', categoryId, 'de')
@@ -46,13 +65,14 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
           {category.paragraph1}
         </p>
 
-        <Image
+        <BlurImage
           src={(category.image1 as Media).url!}
           alt={category.title!}
           width={1500}
           height={1000}
           className={className}
           objectFit="cover"
+          // blurDataURL={placeholderBlurhash}
         />
         <p className="flex-wrap text-muted-foreground text-sm xl:text-base leading-7 text-justify">
           {category.paragraph2}
@@ -60,17 +80,18 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
         <p className="flex-wrap text-muted-foreground text-sm xl:text-base leading-7 text-justify">
           {category.paragraph3}
         </p>
-        <Image
+        <BlurImage
           src={(category.image2 as Media).url!}
           alt={category.title!}
           width={1500}
           height={1000}
           className={className}
           objectFit="cover"
+          // blurDataURL={placeholderBlurhash}
         />
         <Link
           href={`/produkte?category=${(category.category as ProductCategory).title}&page=1`}
-          className="flex gap-2 items-center text-white hover:bg-blue-400 w-fit bg-blue-500 py-2 px-5 rounded-md mx-auto transition duration-100 ease-in"
+          className="flex gap-2 items-center text-white hover:bg-blue-400 w-fit bg-blue-500 py-2 px-5 rounded-md mx-auto transition duration-100 ease-in mt-4"
         >
           <p className="inline">{category.buttonText}</p>
           <MoveUpRight size={16} />

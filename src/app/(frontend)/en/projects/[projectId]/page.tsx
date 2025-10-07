@@ -1,4 +1,4 @@
-import Carousel from '@/components/Carousel'
+import CarouselProj from '@/components/projects/CarouselProj'
 import { fetchById } from '@/lib/payloadClient'
 import { Media, Project } from '@/payload-types'
 
@@ -15,13 +15,11 @@ const ProjectDetailPage = async ({ params }: { params: Promise<{ projectId: stri
       {/* Project Header */}
       <div className="flex flex-col mt-10 lg:mt-14 pt-12 md:pt-16 lg:pt-20 ">
         <div className="flex flex-col text-center max-w-3xl mx-auto pb-8">
-          {/* <p className="mb-2 font-semibold text-blue-900 ">
-            Where Grasses Flourish and Perennials Bloom.
-          </p> */}
+       
           <h2 className="text-3xl font-semibold lg:font-bold lg:text-4xl mb-2 text-priColor">
             {project.title}
           </h2>
-          <div className="flex items-center gap-4 mx-auto">
+         <div className="flex items-center gap-2 sm:gap-4 mx-auto flex-col sm:flex-row">
             <p className="bg-blue-100 px-3 py-1 rounded-full text-sm text-blue-900 text-center ">
               {project.tag}
             </p>
@@ -49,7 +47,7 @@ const ProjectDetailPage = async ({ params }: { params: Promise<{ projectId: stri
             <section className="mb-10 w-full">
               <h2 className="text-xl font-bold text-priColor mb-4">Project Gallery</h2>
               <div className="w-full">
-                <Carousel
+                <CarouselProj
                   slides={project.gallery.images.map((image) => (image as Media).url!)}
                   className={className}
                 />

@@ -1,20 +1,22 @@
 'use client'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import Link from 'next/link'
-import React, { useEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+
+import { useEffect, useRef, useState } from 'react'
+import LocaleSwitcher from './LocaleSwitcher'
+import { Link } from 'react-transition-progress/next'
 
 const MobileNavEN = () => {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
- 
+
   const MenuItemsEN = [
-    { name: 'home', link: `/` },
-    { name: 'about', link: `/about` },
-    { name: 'Locations', link: `/locations` },
-    { name: 'Products', link: `/products` },
-    { name: 'Projects', link: `/projects` },
-    { name: 'Contact', link: `/contact` },
+    { name: 'home', link: `/en` },
+    { name: 'about', link: `/en/about` },
+    { name: 'Locations', link: `/en/locations` },
+    { name: 'Products', link: `/en/products` },
+    { name: 'Projects', link: `/en/projects` },
+    { name: 'Contact', link: `/en/contact` },
   ]
 
   const handleClickOutside = (event: Event) => {
@@ -89,16 +91,18 @@ const MobileNavEN = () => {
                       hidden: { opacity: 0, x: 20 },
                       visible: { opacity: 1, x: 0 },
                     }}
+                    onClick={() => setIsOpen(false)}
                   >
                     <Link
                       href={menu.link}
-                      onClick={() => setIsOpen(false)}
                       className="capitalize text-blue-900 pr-2 hover:text-blue-600 transition-colors"
                     >
                       {menu.name}
                     </Link>
                   </motion.div>
                 ))}
+
+                <LocaleSwitcher />
               </motion.div>
             </motion.div>
           </>

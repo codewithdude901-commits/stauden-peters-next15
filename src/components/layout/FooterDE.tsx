@@ -1,8 +1,9 @@
 import { fetchGlobal } from '@/lib/payloadClient'
 import { Contact } from '@/payload-types'
-import Link from 'next/link'
+
 import { AiFillInstagram } from 'react-icons/ai'
 import { FaFacebookF } from 'react-icons/fa'
+import { Link } from 'react-transition-progress/next'
 
 // MIDDLE LINKS DATA
 interface ItemType {

@@ -1,21 +1,20 @@
+import { postRevalidate } from '@/lib/postRevalidate'
 import { GlobalConfig } from 'payload'
 
 export const Contact: GlobalConfig = {
   slug: 'contact',
   access: { read: () => true },
+  hooks: {
+      afterChange: [
+        async ({ doc }) => {
+          const paths = ['/kontakt', '/en/contact'] 
+          await postRevalidate(paths)
+          return doc
+        },
+      ],
+    },
   fields: [
-    // SEO
-    // {
-    //   name: 'seo',
-    //   type: 'group',
-    //   localized: true,
-    //   fields: [
-    //     { name: 'title', type: 'text', required: true },
-    //     { name: 'description', type: 'textarea' },
-    //     { name: 'ogImage', type: 'upload', relationTo: 'media' },
-    //   ],
-    // },
-
+  
     // Address Section
     {
       name: 'address',

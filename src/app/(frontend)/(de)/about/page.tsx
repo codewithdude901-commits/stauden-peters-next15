@@ -11,6 +11,7 @@ export default async function AboutPageDE() {
     return <div>Inhalt wird geladen...</div>
   }
 
+
   return (
     <div className="min-h-screen">
       {about.sections?.map((block: any, idx: number) => {

@@ -1,6 +1,7 @@
 // src/lib/payloadClient.ts
 import { CollectionSlug, getPayload, GlobalSlug } from 'payload'
 import config from '@payload-config'
+import { ProductCategory } from '@/payload-types'
 
 /**
  * Use Awaited<> here so _payload is the resolved payload instance (BasePayload),
@@ -9,7 +10,7 @@ import config from '@payload-config'
 type PayloadInstance = Awaited<ReturnType<typeof getPayload>>
 let _payload: PayloadInstance | null = null
 
-async function getCachedPayload(): Promise<PayloadInstance> {
+export async function getCachedPayload(): Promise<PayloadInstance> {
   if (_payload) return _payload
   _payload = await getPayload({ config })
   return _payload
@@ -208,3 +209,4 @@ export async function createDoc<T = any>(
 export function _resetPayloadCacheForTests() {
   _payload = null
 }
+

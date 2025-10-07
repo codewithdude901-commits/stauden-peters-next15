@@ -1,10 +1,9 @@
-import Image from 'next/image'
-
+import BlurImage from '@/components/BlurImage'
+import { fetchById } from '@/lib/payloadClient'
 import { Media, Product } from '@/payload-types'
 import { IoSunnyOutline } from 'react-icons/io5'
 import { PiSnowflakeThin } from 'react-icons/pi'
 import { RxHeight, RxWidth } from 'react-icons/rx'
-import { fetchById } from '@/lib/payloadClient'
 
 const ProductDetailPage = async ({ params }: { params: Promise<{ productId: string }> }) => {
   const productId = (await params).productId
@@ -21,14 +20,12 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
           <div className="space-y-4 ">
             {/* Main Image */}
             <div className="relative aspect-square rounded-xl overflow-hidden max-w-2xl mx-auto md:mx-0">
-              <Image
+              <BlurImage
                 src={(product.gallery.image[0] as Media).url!}
                 alt={product.name}
                 width={800}
                 height={800}
                 className=" object-contain w-full h-full"
-                placeholder="blur"
-                blurDataURL="/placeholder.jpg"
                 priority
               />
             </div>

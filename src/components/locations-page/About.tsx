@@ -1,7 +1,7 @@
 'use client'
 
 import { Media } from '@/payload-types'
-import Image from 'next/image'
+import BlurImage from '../BlurImage'
 
 const About = ({ location }: { location: any }) => {
   return (
@@ -27,16 +27,15 @@ const About = ({ location }: { location: any }) => {
 
       {/* right */}
 
-      <div className="w-full xl:w-1/2 2xl:max-h-[550px] rounded-xl overflow-hidden">
-
-        <Image
+      <div className="w-full xl:w-1/2  2xl:max-h-[550px] rounded-xl overflow-hidden">
+        <BlurImage
           src={(location.featuredImage as Media).url!}
           alt={'location image'}
           priority
           width={1920}
           height={1080}
-          placeholder="blur"
-         blurDataURL="/placeholder.jpg"
+          // placeholder="blur"
+          //  blurDataURL={placeholderBlurhash}
           className="h-full object-cover"
         />
       </div>

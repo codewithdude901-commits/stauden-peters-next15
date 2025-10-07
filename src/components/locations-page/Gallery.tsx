@@ -1,10 +1,9 @@
 import React from 'react'
-import Carousel from '../Carousel'
 import { Media } from '@/payload-types'
+import CarouselLoc from './CarouselLoc'
 
 const Gallery = ({ galleryData, locale }: { galleryData: (string | Media)[]; locale: string }) => {
-  const slidePerView = 1
-  const className = 'h-auto rounded-xl'
+  const className = 'rounded-xl'
   if (galleryData?.length === 0) return null
   return (
     <section className="bg-yellow-50/50 py-12 md:py-16 lg:py-24 padding">
@@ -14,14 +13,12 @@ const Gallery = ({ galleryData, locale }: { galleryData: (string | Media)[]; loc
       <h2 className="text-2xl font-semibold lg:font-bold lg:text-3xl mb-6 text-priColor text-center">
         {locale === 'en' ? 'Gallery' : 'Galerie'}
       </h2>
-      <Carousel
+      <CarouselLoc
         slides={galleryData.map((image) => (image as Media).url!)}
         className={className}
-        slidesPerView={slidePerView}
         spaceBetween={5}
         breakpoints={{
-          1024: { slidesPerView: 2 },
-
+          1280: { slidesPerView: 2 },
         }}
       />
     </section>

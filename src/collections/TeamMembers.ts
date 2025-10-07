@@ -1,3 +1,4 @@
+import { postRevalidate } from '@/lib/postRevalidate'
 import { CollectionConfig } from 'payload'
 
 export const TeamMembers: CollectionConfig = {
@@ -8,6 +9,15 @@ export const TeamMembers: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'department', 'email'],
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        const paths = ['/about', '/en/about']
+        await postRevalidate(paths)
+        return doc
+      },
+    ],
   },
   fields: [
     {

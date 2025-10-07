@@ -1,3 +1,4 @@
+import { postRevalidate } from '@/lib/postRevalidate'
 import { CollectionConfig } from 'payload'
 
 export const FormSubmissions: CollectionConfig = {
@@ -13,6 +14,16 @@ export const FormSubmissions: CollectionConfig = {
   admin: {
     useAsTitle: 'fullName',
     defaultColumns: ['fullName', 'email', 'createdAt'],
+  },
+
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        const paths = ['/kontakt', '/en/contact']
+        await postRevalidate(paths)
+        return doc
+      },
+    ],
   },
   fields: [
     { name: 'fullName', type: 'text', required: true },

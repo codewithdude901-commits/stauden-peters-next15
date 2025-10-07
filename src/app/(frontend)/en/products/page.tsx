@@ -1,4 +1,4 @@
-// import ProductsPageContent from './ProductsPageContent'
+
 import ProductIndex from '@/components/products/ProductIndex'
 import { fetchCollectionByCategory, fetchGlobal } from '@/lib/payloadClient'
 

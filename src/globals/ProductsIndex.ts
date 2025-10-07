@@ -1,9 +1,19 @@
 import { GlobalConfig } from 'payload'
 import { ProductsIntro } from '../blocks/ProductsIntro'
+import { postRevalidate } from '@/lib/postRevalidate'
 
 export const ProductsIndex: GlobalConfig = {
   slug: 'productsIndex',
   access: { read: () => true },
+   hooks: {
+        afterChange: [
+          async ({ doc }) => {
+            const paths = ['/produkte', '/en/products']
+            await postRevalidate(paths)
+            return doc
+          },
+        ],
+      },
   fields: [
     // {
     //   name: 'seo',

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from 'react-transition-progress/next'
 
 interface Props {
   title: string
@@ -17,7 +17,6 @@ export default function ProjectCard({ title, category, image, id, locale }: Prop
     <Link href={locale === 'en' ? `/en/projects/${id}` : `/projekte/${id}`}>
       <div className="bg-white rounded-xl shadow-md">
         <div className="rounded-t-xl overflow-hidden h-64">
-     
           <Image
             src={image}
             alt={title}
@@ -26,7 +25,7 @@ export default function ProjectCard({ title, category, image, id, locale }: Prop
             height={1080}
             className="w-full h-full object-cover object-top "
             placeholder="blur"
-          blurDataURL="/placeholder.jpg"
+            blurDataURL="/placeholder.jpg"
           />
         </div>
 

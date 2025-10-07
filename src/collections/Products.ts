@@ -1,6 +1,7 @@
 import { CollectionConfig, CollectionSlug } from 'payload'
 import { ProductCategories } from './ProductCategories'
 import { COLOR } from '@/lib/color'
+import { postRevalidate } from '@/lib/postRevalidate'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -11,6 +12,15 @@ export const Products: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'scientificName'],
   },
+  hooks: {
+          afterChange: [
+            async ({ doc }) => {
+              const paths = ['/produkte', '/en/products', `/produkte/${doc.id}`, `/en/products/${doc.id}`]
+              await postRevalidate(paths)
+              return doc
+            },
+          ],
+        },
   fields: [
     // Identity
     {

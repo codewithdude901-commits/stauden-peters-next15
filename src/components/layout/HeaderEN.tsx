@@ -1,11 +1,14 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
+
 import { usePathname } from 'next/navigation'
 import { Icons } from './Icons'
-import LocaleSwitcherMobile from './LocaleSwitcherMobile'
+
 import MobileNavEN from './MobileNavEN'
+import { Link } from 'react-transition-progress/next'
+import LocaleSwitcher from './LocaleSwitcher'
+
 
 const MenuItemsEN = [
   { name: 'home', link: `/en` },
@@ -51,12 +54,10 @@ const HeaderEN = () => {
         </div>
 
         <div className="flex gap-2 items-center">
-          {/* <div className="hidden lg:flex">
+          <div className="hidden lg:flex">
             <LocaleSwitcher />
-          </div> */}
-          <div>
-            <LocaleSwitcherMobile />
           </div>
+
           <div className="lg:hidden">
             <MobileNavEN />
           </div>

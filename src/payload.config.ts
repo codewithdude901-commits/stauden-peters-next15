@@ -34,6 +34,11 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: './components/admin/Logo.tsx',
+      },
+    },
   },
   collections: [
     Users,
@@ -77,8 +82,7 @@ export default buildConfig({
         media: {
           disableLocalStorage: true,
           generateFileURL: ({ filename }) => {
-            // Return the direct S3 URL
-            return `https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com/${filename}`
+            return `https://d3r57ia6anwehl.cloudfront.net/${filename}`
           },
         },
       },

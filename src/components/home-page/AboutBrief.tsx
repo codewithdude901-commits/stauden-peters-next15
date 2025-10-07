@@ -17,11 +17,8 @@ const AboutBrief = ({ tagline, headline, paragraph1, paragraph2, image }: Props)
       <div className="padding flex flex-col xl:flex-row gap-6 py-12 md:py-16 xl:py-24 text-center xl:text-left items-stretch w-full max-w-[2000px] mx-auto">
         {/* left side */}
         <div className="w-full xl:w-1/2">
-          {/* <p className="mb-2 font-semibold text-blue-900 ">Our Story</p> */}
           <p className="mb-2 font-semibold text-blue-900 ">{tagline}</p>
-          {/* <h2 className="text-3xl font-semibold lg:font-bold lg:text-4xl mb-2 text-priColor">
-            Connecting With Nature
-          </h2> */}
+
           <h2 className="text-3xl font-semibold lg:font-bold lg:text-4xl mb-2 text-priColor">
             {headline}
           </h2>

@@ -1,10 +1,10 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Link } from 'react-transition-progress/next'
 import { Icons } from './Icons'
-import LocaleSwitcherMobile from './LocaleSwitcherMobile'
+import LocaleSwitcher from './LocaleSwitcher'
 import MobileNavDE from './MobileNavDE'
 
 const MenuItemsDE = [
@@ -51,12 +51,10 @@ const HeaderDE = () => {
         </div>
 
         <div className="flex gap-2 items-center">
-          {/* <div className="hidden lg:flex">
+          <div className="hidden lg:flex">
             <LocaleSwitcher />
-          </div> */}
-          <div>
-            <LocaleSwitcherMobile />
           </div>
+
           <div className="lg:hidden">
             <MobileNavDE />
           </div>

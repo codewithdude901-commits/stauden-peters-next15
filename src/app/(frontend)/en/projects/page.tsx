@@ -19,9 +19,7 @@ export default async function Projects() {
           <h2 className="text-3xl font-semibold lg:font-bold lg:text-4xl mb-2 text-priColor">
             {intro?.sections[0]?.headline}
           </h2>
-          {/* <h2 className="text-3xl font-semibold lg:font-bold lg:text-4xl mb-2 text-priColor">
-            Our Projects
-          </h2> */}
+      
           <p className="flex-wrap text-muted-foreground text-sm leading-7 xl:text-base">
            {intro?.sections[0]?.paragraph}
           </p>

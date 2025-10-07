@@ -1,9 +1,19 @@
 import { GlobalConfig } from 'payload'
 import { LocationsIntro } from '../blocks/LocationsIntro'
+import { postRevalidate } from '@/lib/postRevalidate'
 
 export const LocationsIndex: GlobalConfig = {
   slug: 'locationsIndex',
   access: { read: () => true },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        const paths = ['/standorte', '/en/locations']
+        await postRevalidate(paths)
+        return doc
+      },
+    ],
+  },
   fields: [
     // {
     //   name: 'seo',

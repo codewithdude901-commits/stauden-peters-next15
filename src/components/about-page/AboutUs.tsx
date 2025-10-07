@@ -1,5 +1,5 @@
 'use client'
-import Image from 'next/image'
+import BlurImage from '../BlurImage'
 
 interface Props {
   tagline: string
@@ -24,14 +24,14 @@ const AboutUs = ({ tagline, headline, paragraph, image }: Props) => {
 
       {/* right side */}
       <div className="w-full xl:w-1/2 max-h-[550px] h-auto rounded-xl overflow-hidden">
-        <Image
+        <BlurImage
           src={image.url}
           alt={image.alt || 'photo'}
           priority
           width={1920}
           height={1080}
-          placeholder="blur"
-          blurDataURL="/placeholder.jpg"
+          // placeholder="blur"
+          // blurDataURL={placeholderBlurhash}
           className="h-full w-full object-cover"
         />
       </div>

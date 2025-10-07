@@ -1,5 +1,6 @@
 import { CollectionConfig, CollectionSlug } from 'payload'
 import { ProductCategories } from './ProductCategories'
+import { postRevalidate } from '@/lib/postRevalidate'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
@@ -10,6 +11,15 @@ export const Categories: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title'],
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        const paths = ['/', '/en']
+        await postRevalidate(paths)
+        return doc
+      },
+    ],
   },
   fields: [
     { name: 'title', type: 'text' },

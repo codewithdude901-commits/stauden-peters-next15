@@ -8,7 +8,7 @@ const ManagerPhoto = ({ data, locale }: { data: Location; locale: string }) => {
       <div className="flex flex-row gap-4">
         {data.managers.map((manager) => (
           <div className="flex flex-col" key={manager.name}>
-            <div className="aspect-square w-32 xl:w-36 overflow-hidden rounded-md">
+            <div className="aspect-square w-28 xl:w-36 overflow-hidden rounded-md">
               <img
                 className="w-full h-full object-cover object-center hover:scale-[102%] transition-all duration-300"
                 src={

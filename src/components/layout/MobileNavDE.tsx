@@ -1,34 +1,36 @@
-"use client";
-import { Menu, X } from "lucide-react";
-import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+'use client'
+import { Menu, X } from 'lucide-react'
+
+import React, { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-transition-progress/next'
+import LocaleSwitcher from './LocaleSwitcher'
 
 const MobileNavDE = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
-const MenuItemsDE = [
-  { name: 'home', link: `/` },
-  { name: 'Über uns', link: `/about` },
-  { name: 'Standorte', link: `/standorte` },
-  { name: 'Produkte', link: `/produkte` },
-  { name: 'Projekte', link: `/projekte` },
-  { name: 'Kontakt', link: `/kontakt` },
-]
+  const MenuItemsDE = [
+    { name: 'home', link: `/` },
+    { name: 'Über uns', link: `/about` },
+    { name: 'Standorte', link: `/standorte` },
+    { name: 'Produkte', link: `/produkte` },
+    { name: 'Projekte', link: `/projekte` },
+    { name: 'Kontakt', link: `/kontakt` },
+  ]
 
   const handleClickOutside = (event: Event) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setIsOpen(false);
+      setIsOpen(false)
     }
-  };
+  }
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener('click', handleClickOutside)
     return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
 
   return (
     <div ref={menuRef} className="relative z-50">
@@ -54,10 +56,10 @@ const MenuItemsDE = [
 
             {/* Slide-in Menu */}
             <motion.div
-              initial={{ x: "100%" }}
+              initial={{ x: '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 80, damping: 15 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 80, damping: 15 }}
               className="fixed top-0 right-0 h-full w-60 sm:w-72 bg-white shadow-lg flex flex-col p-4"
             >
               <div className="flex justify-end">
@@ -89,23 +91,24 @@ const MenuItemsDE = [
                       hidden: { opacity: 0, x: 20 },
                       visible: { opacity: 1, x: 0 },
                     }}
+                    onClick={() => setIsOpen(false)}
                   >
                     <Link
                       href={menu.link}
-                      onClick={() => setIsOpen(false)}
                       className="capitalize text-blue-900 pr-2 hover:text-blue-600 transition-colors"
                     >
                       {menu.name}
                     </Link>
                   </motion.div>
                 ))}
+                <LocaleSwitcher />
               </motion.div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
     </div>
-  );
-};
+  )
+}
 
-export default MobileNavDE;
+export default MobileNavDE

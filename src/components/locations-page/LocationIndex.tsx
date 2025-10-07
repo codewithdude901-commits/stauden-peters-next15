@@ -1,7 +1,8 @@
-import React from 'react'
-import type { LocationsIndex, Media, Location } from '@/payload-types'
-import Link from 'next/link'
-import Image from 'next/image'
+import type { Location, LocationsIndex, Media } from '@/payload-types'
+
+import BlurImage from '../BlurImage'
+import { placeholderBlurhash } from '@/lib/utils'
+import { Link } from 'react-transition-progress/next'
 
 const LocationIndex = ({
   introData,
@@ -34,16 +35,16 @@ const LocationIndex = ({
         </p>
       </div>
       {/* image */}
-      <div className="h-auto max-h-[670px] max-w-7xl rounded-2xl flex justify-center self-center overflow-hidden mb-12 md:mb-20 mx-4">
-        <Image
+      <div className="h-auto max-h-[670px] max-w-7xl rounded-2xl flex justify-center self-center overflow-hidden mb-12 md:mb-20 mx-4 ">
+        <BlurImage
           src={(data.image as Media).url!}
           alt="locations image"
           priority
           width={1920}
           height={1080}
           placeholder="blur"
-          blurDataURL="/placeholder.jpg"
-          className="rounded-2xl h-full w-full object-cover"
+          blurDataURL={placeholderBlurhash}
+          className="rounded-2xl h-full w-full object-cover min-h-72"
         />
       </div>
       {/* Locations Grid */}
@@ -60,11 +61,11 @@ const LocationIndex = ({
                 key={location.id}
               >
                 <div className="bg-white rounded-xl shadow-md items-stretch h-full">
-                  <div className="rounded-t-xl overflow-hidden h-64 border  ">
-                    <Image
+                  <div className="rounded-t-xl overflow-hidden h-48 lg:h-64 border  ">
+                    <BlurImage
                       src={(location.thumbnail as Media).url!}
                       alt="location"
-                      className="hover:scale-[103%] h-full w-full object-cover transition-transform duration-300 "
+                      className="hover:scale-[103%] h-full w-full object-cover object-top transition-transform duration-300 "
                       priority
                       width={1920}
                       height={1080}

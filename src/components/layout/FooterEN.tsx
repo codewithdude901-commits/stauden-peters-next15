@@ -1,6 +1,8 @@
 import { fetchGlobal } from '@/lib/payloadClient'
 import { Contact } from '@/payload-types'
-import Link from 'next/link'
+import { AiFillInstagram } from 'react-icons/ai'
+import { FaFacebookF } from 'react-icons/fa'
+import { Link } from 'react-transition-progress/next'
 
 // MIDDLE LINKS DATA
 interface ItemType {
@@ -39,27 +41,21 @@ const FooterEN = async () => {
               <div className="flex gap-4 items-center">
                 {footerData.socials?.facebook && (
                   <Link
+                    className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-600"
                     href={footerData.socials?.facebook}
-                    className="footer-fb-icons"
                     target="_blank"
                   >
-                    <img
-                      src={'/footer/facebook.svg'}
-                      alt="facebook"
-                      width={12}
-                      height={10}
-                      className="mx-1"
-                    />
+                    <FaFacebookF size={20} />
                   </Link>
                 )}
 
                 {footerData.socials?.instagram && (
                   <Link
+                    className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-600"
                     href={footerData.socials?.instagram}
-                    className="footer-fb-icons"
                     target="_blank"
                   >
-                    <img src={'/footer/instagram.svg'} alt="instagram" width={20} height={20} />
+                    <AiFillInstagram size={24} />
                   </Link>
                 )}
               </div>

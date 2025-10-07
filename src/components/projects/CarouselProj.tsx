@@ -16,19 +16,13 @@ interface CarouselProps {
   spaceBetween?: number
 }
 
-const Carousel = ({
-  slides,
-  className,
-  slidesPerView,
-  breakpoints,
-  spaceBetween,
-}: CarouselProps) => {
+const CarouselProj = ({ slides, className, breakpoints, spaceBetween }: CarouselProps) => {
   return (
     <>
       <div>
         <Swiper
           spaceBetween={spaceBetween ? spaceBetween : 0}
-          slidesPerView={slidesPerView}
+          // slidesPerView={slidesPerView}
           // loop={true}
           centeredSlides={false}
           autoplay={{
@@ -37,24 +31,21 @@ const Carousel = ({
           }}
           pagination
           modules={[Navigation, Pagination, Autoplay]}
-          onSwiper={(swiper) => console.log(swiper)}
           breakpoints={breakpoints}
           className={className}
         >
           {slides.map((image, index) => (
-            <SwiperSlide key={index}>
-              <div className={`max-h-[650px] w-full h-full items-center justify-center`}>
-                <Image
-                  src={image}
-                  alt={'slider image'}
-                  priority
-                  width={1920}
-                  height={1080}
-                  placeholder="blur"
-                  blurDataURL="/placeholder.jpg"
-                  className="h-full object-cover"
-                />
-              </div>
+            <SwiperSlide key={index} className="max-h-[600px] overflow-hidden">
+              <Image
+                src={image}
+                alt={'slider image'}
+                priority
+                width={1920}
+                height={1080}
+                placeholder="blur"
+                blurDataURL="/placeholder.jpg"
+                className="object-cover"
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -63,4 +54,4 @@ const Carousel = ({
   )
 }
 
-export default Carousel
+export default CarouselProj
