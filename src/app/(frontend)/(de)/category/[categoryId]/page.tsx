@@ -3,9 +3,8 @@ import YouTubeThumbnailPlayer from '@/components/YouTubeThumbnailPlayer'
 import { fetchDocByCategory, getCachedPayload } from '@/lib/payloadClient'
 import { Category, Media, ProductCategory } from '@/payload-types'
 import { MoveUpRight } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from 'react-transition-progress/next'
 
-type Params = { categoryId: string }
 
 export async function generateStaticParams() {
   const payload = await getCachedPayload()
@@ -24,7 +23,7 @@ export async function generateStaticParams() {
   return params
 }
 
-const CategoryDetailPage = async ({ params }: { params: Params }) => {
+const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: string }> }) => {
   const categoryId = (await params).categoryId
 
   const category = await fetchDocByCategory<Category>('categories', categoryId, 'de')

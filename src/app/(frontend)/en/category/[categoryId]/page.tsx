@@ -1,10 +1,27 @@
 import YouTubeThumbnailPlayer from '@/components/YouTubeThumbnailPlayer'
-import { fetchDocByCategory } from '@/lib/payloadClient'
+import { fetchDocByCategory, getCachedPayload } from '@/lib/payloadClient'
 
 import { Category, Media, ProductCategory } from '@/payload-types'
 import { MoveUpRight } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from 'react-transition-progress/next'
+
+export async function generateStaticParams() {
+  const payload = await getCachedPayload()
+
+  // Fetch all categories (only the fields we need)
+  const res = await payload.find({
+    collection: 'productCategories',
+    select: { title: true },
+  })
+
+  // Map to params
+  const params = res.docs.map((category) => ({
+    categoryId: category.title,
+  }))
+
+  return params
+}
 
 const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: string }> }) => {
   const categoryId = (await params).categoryId
