@@ -14,7 +14,6 @@ interface TeamProps {
 }
 
 const Team = ({ tagline, headline, people }: TeamProps) => {
-
   return (
     <section className="py-12 md:py-16 lg:py-24 padding">
       <div className=" ">
@@ -32,8 +31,8 @@ const Team = ({ tagline, headline, people }: TeamProps) => {
               <div className="rounded-md w-28 h-28 overflow-hidden mx-auto  mb-2">
                 <img
                   className="w-full h-full  hover:scale-[102%] duration-300 object-cover transition-all"
-                  src={person.photo.url}
-                  alt={person.photo.alt || person.name}
+                  src={person?.photo?.url}
+                  alt={person?.photo?.alt || person.name}
                 />
               </div>
               <div className=" text-center">

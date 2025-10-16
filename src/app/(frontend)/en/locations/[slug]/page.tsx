@@ -8,6 +8,8 @@ import { Location } from '@/payload-types'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+export const revalidate = 86400;
+
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug
   const data = await fetchById<Location>('locations', slug, { locale: 'en' })
