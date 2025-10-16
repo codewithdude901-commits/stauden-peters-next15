@@ -6,6 +6,7 @@ import { startTransition, useEffect, useState } from 'react'
 import { useProgress } from 'react-transition-progress'
 import { ProductCard } from './ProcuctCard'
 
+
 interface ProductDataProps {
   docs: Product[]
   totalPages: number
@@ -34,32 +35,41 @@ const ProductIndex = ({
   const [currentPage, setCurrentPage] = useState<number>(initialPage)
 
   const startProgress = useProgress()
-  // const itemsPerPage = 12
 
-  // Update URL when state changes
+  // Sync state from URL params (handles browser back/forward without triggering router or scroll)
   useEffect(() => {
-    const params = new URLSearchParams()
-    params.set('category', selectedCategories)
-    params.set('page', String(currentPage))
-    router.replace(`?${params.toString()}`, { scroll: false })
-  }, [selectedCategories, currentPage, router])
+    const category = searchParams.get('category') || 'elegrass'
+    const page = parseInt(searchParams.get('page') || '1', 10)
+    setSelectedCategories(category)
+    setCurrentPage(page)
+  }, [searchParams])
+
+  // Update URL when state changes (scroll to top for pagination/category; only if needed to avoid loops)
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams) // Preserve any other query params
+    const newCategory = selectedCategories
+    const newPage = String(currentPage)
+
+    // Only replace if there's a mismatch (prevents unnecessary updates on back nav)
+    if (params.get('category') !== newCategory || params.get('page') !== newPage) {
+      params.set('category', newCategory)
+      params.set('page', newPage)
+      router.replace(`?${params.toString()}`, { scroll: true }) // Scrolls to top on client nav
+    }
+  }, [selectedCategories, currentPage, searchParams, router])
 
   const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= productData.totalPages) {
+      setCurrentPage(page) // Triggers URL update + scroll to top
+    }
     startTransition(() => {
-      // start visual progress
       startProgress()
-
-      if (page >= 1 && page <= productData.totalPages) {
-        setCurrentPage(page)
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      }
     })
   }
 
   return (
     <div className="mt-10 lg:mt-14 py-12 md:py-16 lg:py-20 padding min-h-screen">
       {/* Header */}
-
       {introData.sections && introData.sections.length > 0 && (
         <div className="text-center max-w-7xl mx-auto mb-6 sm:mb-8">
           <p className="mb-2 font-semibold text-blue-900">{introData.sections[0].tagline}</p>
@@ -79,9 +89,8 @@ const ProductIndex = ({
             <button
               onClick={() => {
                 setSelectedCategories(cat)
-                setCurrentPage(1)
+                setCurrentPage(1) // Triggers URL update + scroll to top
                 startTransition(() => {
-                  // start visual progress
                   startProgress()
                 })
               }}

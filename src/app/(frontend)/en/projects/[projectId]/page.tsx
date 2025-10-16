@@ -1,6 +1,24 @@
 import CarouselProj from '@/components/projects/CarouselProj'
-import { fetchById } from '@/lib/payloadClient'
+import { fetchById, getCachedPayload } from '@/lib/payloadClient'
 import { Media, Project } from '@/payload-types'
+
+export const revalidate = 86400
+
+export async function generateStaticParams() {
+  const payload = await getCachedPayload()
+
+  // Fetch all categories (only the fields we need)
+  const res = await payload.find({
+    collection: 'projects',
+  })
+
+  // Map to params
+  const params = res.docs.map((project) => ({
+    projectId: project.id,
+  }))
+
+  return params
+}
 
 const ProjectDetailPage = async ({ params }: { params: Promise<{ projectId: string }> }) => {
   const projectId = (await params).projectId

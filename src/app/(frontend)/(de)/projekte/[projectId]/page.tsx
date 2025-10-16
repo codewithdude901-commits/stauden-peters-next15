@@ -1,6 +1,24 @@
 import CarouselProj from '@/components/projects/CarouselProj'
-import { fetchById } from '@/lib/payloadClient'
+import { fetchById, getCachedPayload } from '@/lib/payloadClient'
 import { Media, Project } from '@/payload-types'
+
+export const revalidate = 86400
+
+export async function generateStaticParams() {
+  const payload = await getCachedPayload()
+
+  // Fetch all categories (only the fields we need)
+  const res = await payload.find({
+    collection: 'projects',
+  })
+
+  // Map to params
+  const params = res.docs.map((project) => ({
+    projectId: project.id,
+  }))
+
+  return params
+}
 
 const ProjectDetailPage = async ({ params }: { params: Promise<{ projectId: string }> }) => {
   const projectId = (await params).projectId
@@ -15,7 +33,6 @@ const ProjectDetailPage = async ({ params }: { params: Promise<{ projectId: stri
       {/* Project Header */}
       <div className="flex flex-col mt-10 lg:mt-14 pt-12 md:pt-16 lg:pt-20 ">
         <div className="flex flex-col text-center max-w-3xl mx-auto pb-8">
-          
           <h2 className="text-3xl font-semibold lg:font-bold lg:text-4xl mb-2 text-priColor">
             {project.title}
           </h2>

@@ -6,6 +6,8 @@ import { MoveUpRight } from 'lucide-react'
 import Image from 'next/image'
 import { Link } from 'react-transition-progress/next'
 
+export const revalidate = 86400
+
 export async function generateStaticParams() {
   const payload = await getCachedPayload()
 

@@ -3,7 +3,7 @@ interface TeamProps {
   headline: string
   people: {
     name: string
-    position: string
+    department: string
     phone: string
     email: string
     photo: {
@@ -41,7 +41,7 @@ const Team = ({ tagline, headline, people }: TeamProps) => {
                     {person.name}
                   </h2>
                   <p className="block text-xs text-blue-500 capitalize dark:text-blue-300">
-                    {person.position}
+                    {person.department}
                   </p>
                   <p className="text-sm text-gray-500 dark:text-gray-400 leading-7">
                     {person.phone}

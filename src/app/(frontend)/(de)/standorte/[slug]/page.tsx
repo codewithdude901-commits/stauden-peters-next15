@@ -2,13 +2,29 @@ import About from '@/components/locations-page/About'
 import Gallery from '@/components/locations-page/Gallery'
 import ManagerPhoto from '@/components/locations-page/ManagerPhoto'
 import TeamLoc from '@/components/locations-page/TeamLoc'
-import { fetchById } from '@/lib/payloadClient'
+import { fetchById, getCachedPayload } from '@/lib/payloadClient'
 
 import { Location } from '@/payload-types'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-export const revalidate = 86400;
+export const revalidate = 86400
+
+export async function generateStaticParams() {
+  const payload = await getCachedPayload()
+
+  // Fetch all categories (only the fields we need)
+  const res = await payload.find({
+    collection: 'locations',
+  })
+
+  // Map to params
+  const params = res.docs.map((location) => ({
+    slug: location.id,
+  }))
+
+  return params
+}
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const slug = (await params).slug
