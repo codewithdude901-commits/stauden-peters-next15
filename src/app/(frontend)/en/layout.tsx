@@ -16,6 +16,22 @@ export const metadata = {
   description:
     'Stauden Peters stands for sustainable cultivation, reliability, and outstanding plant quality — supplying professional gardeners and landscape designers across Europe.',
   title: 'Stauden Peters – Premium Perennials & Grasses from the Lower Rhine',
+  openGraph: {
+    title: 'Stauden Peters – Premium Perennials & Grasses from the Lower Rhine',
+    description:
+      'Stauden Peters stands for sustainable cultivation, reliability, and outstanding plant quality — supplying professional gardeners and landscape designers across Europe.',
+    url: 'http://localhost:3000/en',
+    siteName: 'Stauden Peters',
+    images: [
+      {
+        url: 'http://localhost:3000/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Stauden Peters - OG Image',
+      },
+    ],
+    type: 'website',
+  },
 }
 
 export default function LayoutEN({ children }: { children: React.ReactNode }) {

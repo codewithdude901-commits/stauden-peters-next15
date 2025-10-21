@@ -16,12 +16,29 @@ export const metadata = {
   description:
     'Stauden Peters steht für nachhaltigen Anbau, Zuverlässigkeit und hervorragende Pflanzenqualität – und beliefert professionelle Gärtner und Landschaftsarchitekten in ganz Europa.',
   title: 'Stauden Peters – Premium Stauden & Gräser vom Niederrhein',
+
+  openGraph: {
+    title: 'Stauden Peters – Premium Stauden & Gräser vom Niederrhein',
+    description:
+      'Stauden Peters steht für nachhaltigen Anbau, Zuverlässigkeit und hervorragende Pflanzenqualität – und beliefert professionelle Gärtner und Landschaftsarchitekten in ganz Europa.',
+    url: 'http://localhost:3000/',
+    siteName: 'Stauden Peters',
+    images: [
+      {
+        url: 'http://localhost:3000/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Stauden Peters - OG Image',
+      },
+    ],
+    type: 'website',
+  },
 }
 
 export default function LayoutDE({ children }: { children: React.ReactNode }) {
   return (
     <html>
-        <head>
+      <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${poppins.className} antialiased`}>
