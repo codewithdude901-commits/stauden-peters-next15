@@ -56,7 +56,7 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
                   </div>
                   <p>{product.details?.height}</p>
                 </div>
-                <div className="flex justify-between border-b pb-1">
+                <div className="flex justify-between border-b pb-1 items-center">
                   <div className="flex items-center gap-4">
                     <RxWidth className="h-8 w-8 rounded bg-priColor text-white p-1" />
 
@@ -64,14 +64,14 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
                   </div>
                   <p>{product.details?.diameter}</p>
                 </div>
-                <div className="flex justify-between border-b pb-1">
+                <div className="flex justify-between border-b pb-1 items-center">
                   <div className="flex items-center gap-4">
-                    <PiSnowflakeThin className="h-8 w-8 rounded bg-priColor text-white p-1 " />
+                    <PiSnowflakeThin className="h-8 w-8 rounded bg-priColor text-white p-1" />
                     <span className="capitalize">Winterhart:</span>
                   </div>
                   <p>{product.details?.hardiness}</p>
                 </div>
-                <div className="flex justify-between border-b pb-1">
+                <div className="flex justify-between border-b pb-1 items-center">
                   <div className="flex items-center gap-4">
                     <IoSunnyOutline className="h-8 w-8 rounded bg-priColor text-white p-1" />
                     <span className="capitalize">Leichte:</span>

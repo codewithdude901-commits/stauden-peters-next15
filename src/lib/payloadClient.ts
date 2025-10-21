@@ -95,12 +95,12 @@ export async function fetchCollectionByCategory<T = any>(
   locale: 'de' | 'en',
   category: string,
   page = 1,
-  opts: { limit?: number; sort?: string } = {},
+  opts: { limit?: number; sort?: string []} = {},
 ): Promise<PayloadFindResult<T> | null> {
   try {
     const payload = await getCachedPayload()
 
-    const limit = opts.limit ?? 12
+    const limit = opts.limit ?? 24
     const sort = opts.sort ?? 'createdAt'
 
     const res = await payload.find({
@@ -208,4 +208,3 @@ export async function createDoc<T = any>(
 export function _resetPayloadCacheForTests() {
   _payload = null
 }
-

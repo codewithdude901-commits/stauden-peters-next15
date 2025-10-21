@@ -15,7 +15,9 @@ export default async function ProductsPage({
 
   const intro = await fetchGlobal<ProductsIndex>({ slug: 'productsIndex', locale: 'de' })
 
-  const productData = await fetchCollectionByCategory('products', 'de', category, sanitizedPage)
+  const productData = await fetchCollectionByCategory('products', 'de', category, sanitizedPage, {
+    sort: ['name', 'scientificName'],
+  })
 
   if (!intro || !productData) {
     return <div>Content loading...</div>

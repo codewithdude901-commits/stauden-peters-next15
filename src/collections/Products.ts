@@ -13,14 +13,14 @@ export const Products: CollectionConfig = {
     defaultColumns: ['name', 'scientificName'],
   },
   hooks: {
-          afterChange: [
-            async ({ doc }) => {
-              const paths = ['/produkte', '/en/products', `/produkte/${doc.id}`, `/en/products/${doc.id}`]
-              await postRevalidate(paths)
-              return doc
-            },
-          ],
-        },
+    afterChange: [
+      async ({ doc }) => {
+        const paths = ['/produkte', '/en/products', `/produkte/${doc.id}`, `/en/products/${doc.id}`]
+        await postRevalidate(paths)
+        return doc
+      },
+    ],
+  },
   fields: [
     // Identity
     {
@@ -28,13 +28,7 @@ export const Products: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    // {
-    //   name: 'slug',
-    //   type: 'text',
-    //   required: true,
-    //   unique: true,
-    //   localized: true,
-    // },
+
     {
       name: 'scientificName',
       type: 'text',
@@ -82,6 +76,7 @@ export const Products: CollectionConfig = {
     {
       name: 'details',
       type: 'group',
+
       fields: [
         { name: 'height', type: 'text' },
         { name: 'diameter', type: 'text' },
@@ -90,17 +85,5 @@ export const Products: CollectionConfig = {
       ],
     },
     { name: 'description', type: 'textarea', localized: true },
-
-    // SEO
-    // {
-    //   name: 'seo',
-    //   type: 'group',
-    //   localized: true,
-    //   fields: [
-    //     { name: 'title', type: 'text' },
-    //     { name: 'description', type: 'textarea' },
-    //     { name: 'ogImage', type: 'upload', relationTo: 'media' },
-    //   ],
-    // },
   ],
 }

@@ -1,4 +1,3 @@
-
 import ProductIndex from '@/components/products/ProductIndex'
 import { fetchCollectionByCategory, fetchGlobal } from '@/lib/payloadClient'
 
@@ -15,7 +14,9 @@ export default async function ProductsPage({
 
   const intro = await fetchGlobal<ProductsIndex>({ slug: 'productsIndex', locale: 'en' })
 
-  const productData = await fetchCollectionByCategory('products', 'en', category, sanitizedPage)
+  const productData = await fetchCollectionByCategory('products', 'de', category, sanitizedPage, {
+    sort: ['name', 'scientificName'],
+  })
 
   if (!intro || !productData) {
     return <div>Content loading...</div>
