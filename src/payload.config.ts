@@ -63,7 +63,7 @@ export default buildConfig({
   ],
 
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '831c30f95e052a3183375f94',
+  secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
@@ -72,9 +72,7 @@ export default buildConfig({
     defaultLocale: 'de',
   },
   db: mongooseAdapter({
-    url:
-      process.env.DATABASE_URI ||
-      'mongodb+srv://codewithdude901:TdtySaMKzZU8wF1T@cluster0.zy4xmzz.mongodb.net/',
+    url: process.env.DATABASE_URI || '',
   }),
   sharp,
   plugins: [

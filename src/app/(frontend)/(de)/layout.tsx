@@ -21,11 +21,11 @@ export const metadata = {
     title: 'Stauden Peters – Premium Stauden & Gräser vom Niederrhein',
     description:
       'Stauden Peters steht für nachhaltigen Anbau, Zuverlässigkeit und hervorragende Pflanzenqualität – und beliefert professionelle Gärtner und Landschaftsarchitekten in ganz Europa.',
-    url: 'http://localhost:3000/',
+    url: 'https://www.stauden-peters.de/',
     siteName: 'Stauden Peters',
     images: [
       {
-        url: 'http://localhost:3000/og-image.jpg',
+        url: 'https://www.stauden-peters.de/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Stauden Peters - OG Image',

@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { Button } from '../ui/button'
+import { SquareArrowOutUpRight } from 'lucide-react'
 
 interface Card {
   image: {
@@ -57,6 +59,10 @@ const Features = ({ tagline, headline, paragraph, cards, locale }: Props) => {
               <p className="mb-2 text-muted-foreground text-sm leading-7 xl:text-base">
                 {cards[0].text}
               </p>
+              <Button className="bg-priColor hover:bg-priColor/90 flex gap-2 mb-2">
+                <span>{locale === 'en' ? 'Read More' : 'Mehr lesen'}</span>{' '}
+                <SquareArrowOutUpRight />
+              </Button>
             </Link>
             <Link
               href={(locale === 'en' && '/en/category/elegardens') || '/category/elegardens'}
@@ -80,6 +86,10 @@ const Features = ({ tagline, headline, paragraph, cards, locale }: Props) => {
               <p className="mb-2 text-muted-foreground text-sm leading-7 xl:text-base">
                 {cards[1].text}
               </p>
+              <Button className="bg-priColor hover:bg-priColor/90 flex gap-2 mb-2">
+                <span>{locale === 'en' ? 'Read More' : 'Mehr lesen'}</span>{' '}
+                <SquareArrowOutUpRight />
+              </Button>
             </Link>
             <Link
               href={(locale === 'en' && '/en/category/elerose') || '/category/elerose'}
@@ -102,6 +112,10 @@ const Features = ({ tagline, headline, paragraph, cards, locale }: Props) => {
               <p className="mb-2 text-muted-foreground text-sm leading-7 xl:text-base">
                 {cards[2].text}
               </p>
+              <Button className="bg-priColor hover:bg-priColor/90 flex gap-2 mb-2">
+                <span>{locale === 'en' ? 'Read More' : 'Mehr lesen'}</span>{' '}
+                <SquareArrowOutUpRight />
+              </Button>
             </Link>
           </div>
         </div>

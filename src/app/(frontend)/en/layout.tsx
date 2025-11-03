@@ -20,11 +20,11 @@ export const metadata = {
     title: 'Stauden Peters – Premium Perennials & Grasses from the Lower Rhine',
     description:
       'Stauden Peters stands for sustainable cultivation, reliability, and outstanding plant quality — supplying professional gardeners and landscape designers across Europe.',
-    url: 'http://localhost:3000/en',
+    url: 'https://www.stauden-peters.de/en',
     siteName: 'Stauden Peters',
     images: [
       {
-        url: 'http://localhost:3000/og-image.jpg',
+        url: 'https://www.stauden-peters.de/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Stauden Peters - OG Image',

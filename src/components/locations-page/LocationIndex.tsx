@@ -3,6 +3,8 @@ import type { Location, LocationsIndex, Media } from '@/payload-types'
 import BlurImage from '../BlurImage'
 
 import { Link } from 'react-transition-progress/next'
+import { Button } from '../ui/button'
+import { SquareArrowOutUpRight } from 'lucide-react'
 
 const LocationIndex = ({
   introData,
@@ -58,7 +60,7 @@ const LocationIndex = ({
                 }
                 key={location.id}
               >
-                <div className="bg-white rounded-xl shadow-md items-stretch h-full">
+                <div className="bg-white rounded-xl shadow-md items-stretch h-full justify-between flex flex-col">
                   <div className="rounded-t-xl overflow-hidden h-48 lg:h-64 border  ">
                     <BlurImage
                       src={(location.thumbnail as Media).url!}
@@ -91,6 +93,10 @@ const LocationIndex = ({
                       </div>
                     </div>
                   </div>
+                   <Button className="bg-priColor hover:bg-priColor/90 flex gap-2 mb-2 m-4">
+                <span>{locale === 'en' ? 'Read More' : 'Mehr lesen'}</span>{' '}
+                <SquareArrowOutUpRight />
+              </Button>
                 </div>
               </Link>
             ))}
