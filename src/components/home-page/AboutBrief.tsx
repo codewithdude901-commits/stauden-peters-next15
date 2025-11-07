@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import BlurImage from '../BlurImage'
 
 interface Props {
   tagline: string
@@ -34,15 +34,12 @@ const AboutBrief = ({ tagline, headline, paragraph1, paragraph2, image }: Props)
 
         {/* right side */}
         <div className="w-full xl:w-1/2 h-auto max-h-[500px] overflow-hidden rounded-xl">
-          <Image
+          <BlurImage
             src={image.url}
             alt={image?.alt || 'hero-story-photo'}
-            priority
             width={1920}
             height={1080}
             className="w-full h-full rounded-xl object-cover xl:object-left-top "
-            placeholder="blur"
-            blurDataURL="/placeholder.jpg"
           />
         </div>
       </div>

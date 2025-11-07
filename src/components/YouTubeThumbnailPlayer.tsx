@@ -1,6 +1,6 @@
 'use client'
-import Image from 'next/image'
 import React, { useState } from 'react'
+import BlurImage from './BlurImage'
 
 interface YouTubeThumbnailPlayerProps {
   videoId: string
@@ -54,15 +54,12 @@ const YouTubeThumbnailPlayer: React.FC<YouTubeThumbnailPlayerProps> = ({
         <>
           {/* Thumbnail */}
 
-          <Image
+          <BlurImage
             src={thumbnail?.url as string}
             alt={thumbnail?.alt || 'YouTube Video Thumbnail'}
-            priority
             width={1920}
             height={1080}
             className="absolute top-0 left-0 w-full h-full object-cover"
-            placeholder="blur"
-            blurDataURL="/placeholder.jpg"
           />
           {/* Play Button Overlay */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/20">

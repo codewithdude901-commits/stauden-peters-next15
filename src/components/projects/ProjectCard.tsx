@@ -1,7 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import { Link } from 'react-transition-progress/next'
+import BlurImage from '../BlurImage'
 
 interface Props {
   title: string
@@ -17,15 +17,12 @@ export default function ProjectCard({ title, category, image, id, locale }: Prop
     <Link href={locale === 'en' ? `/en/projects/${id}` : `/projekte/${id}`}>
       <div className="bg-white rounded-xl shadow-md">
         <div className="rounded-t-xl overflow-hidden h-64">
-          <Image
+          <BlurImage
             src={image}
             alt={title}
-            priority
             width={1920}
             height={1080}
             className="w-full h-full object-cover object-top "
-            placeholder="blur"
-            blurDataURL="/placeholder.jpg"
           />
         </div>
 

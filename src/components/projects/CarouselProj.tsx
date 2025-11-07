@@ -3,10 +3,10 @@
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import Image from 'next/image'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import BlurImage from '../BlurImage'
 
 interface CarouselProps {
   slides: string[]
@@ -36,14 +36,11 @@ const CarouselProj = ({ slides, className, breakpoints, spaceBetween }: Carousel
         >
           {slides.map((image, index) => (
             <SwiperSlide key={index} className="max-h-[600px] overflow-hidden">
-              <Image
+              <BlurImage
                 src={image}
                 alt={'slider image'}
-                priority
                 width={1920}
                 height={1080}
-                placeholder="blur"
-                blurDataURL="/placeholder.jpg"
                 className="object-cover"
               />
             </SwiperSlide>

@@ -1,9 +1,9 @@
+import BlurImage from '@/components/BlurImage'
 import YouTubeThumbnailPlayer from '@/components/YouTubeThumbnailPlayer'
 import { fetchDocByCategory, getCachedPayload } from '@/lib/payloadClient'
 
 import { Category, Media, ProductCategory } from '@/payload-types'
 import { MoveUpRight } from 'lucide-react'
-import Image from 'next/image'
 import { Link } from 'react-transition-progress/next'
 
 export const revalidate = 86400
@@ -66,13 +66,13 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
           {category?.paragraph1}
         </p>
 
-        <Image
+        <BlurImage
           src={(category.image1 as Media).url!}
           alt={category.title!}
           width={1500}
           height={1000}
           className={className}
-          objectFit="cover"
+ 
         />
         <p className="flex-wrap text-muted-foreground text-sm xl:text-base leading-7 text-justify">
           {category?.paragraph2}
@@ -80,13 +80,12 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
         <p className="flex-wrap text-muted-foreground text-sm xl:text-base leading-7 text-justify">
           {category?.paragraph3}
         </p>
-        <Image
+        <BlurImage
           src={(category.image2 as Media).url!}
           alt={category.title!}
           width={1500}
           height={1000}
           className={className}
-          objectFit="cover"
         />
         <Link
           href={`/en/products?category=${(category.category as ProductCategory).title}&page=1`}

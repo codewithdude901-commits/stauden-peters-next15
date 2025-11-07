@@ -31,11 +31,8 @@ const About = ({ location }: { location: any }) => {
         <BlurImage
           src={(location.featuredImage as Media).url!}
           alt={'location image'}
-          priority
           width={1920}
           height={1080}
-          // placeholder="blur"
-          //  blurDataURL={placeholderBlurhash}
           className="h-full object-cover"
         />
       </div>

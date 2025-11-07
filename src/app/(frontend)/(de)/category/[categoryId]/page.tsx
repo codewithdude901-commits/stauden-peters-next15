@@ -70,7 +70,7 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
           width={1500}
           height={1000}
           className={className}
-          objectFit="cover"
+
           // blurDataURL={placeholderBlurhash}
         />
         <p className="flex-wrap text-muted-foreground text-sm xl:text-base leading-7 text-justify">
@@ -85,8 +85,7 @@ const CategoryDetailPage = async ({ params }: { params: Promise<{ categoryId: st
           width={1500}
           height={1000}
           className={className}
-          objectFit="cover"
-          // blurDataURL={placeholderBlurhash}
+
         />
         <Link
           href={`/produkte?category=${(category.category as ProductCategory).title}&page=1`}

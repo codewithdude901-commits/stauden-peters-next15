@@ -58,12 +58,11 @@ const Carousel = ({
               <BlurImage
                 src={slide.url}
                 alt={slide.alt}
-                priority
+  
                 width={1920}
                 height={1080}
                 className="block h-screen max-h-[calc(100vh-65px)] w-screen object-cover sm:object-left-top"
-                placeholder="blur"
-                blurDataURL={'/placeholder.jpg'}
+ 
               />
             </div>
           </SwiperSlide>

@@ -26,7 +26,7 @@ const ProductDetailPage = async ({ params }: { params: Promise<{ productId: stri
                 width={800}
                 height={800}
                 className=" object-contain w-full h-full"
-                priority
+
               />
             </div>
           </div>

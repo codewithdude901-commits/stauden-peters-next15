@@ -27,7 +27,6 @@ const AboutUs = ({ tagline, headline, paragraph, image }: Props) => {
         <BlurImage
           src={image.url}
           alt={image.alt || 'photo'}
-          priority
           width={1920}
           height={1080}
           // placeholder="blur"

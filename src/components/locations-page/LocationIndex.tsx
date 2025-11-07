@@ -41,7 +41,6 @@ const LocationIndex = ({
         <BlurImage
           src={(data.image as Media).url!}
           alt="locations image"
-          priority
           width={1920}
           height={1080}
           className="rounded-2xl h-full w-full object-cover min-h-72"
@@ -52,7 +51,7 @@ const LocationIndex = ({
         <div className="">
           <h3 className="text-xl font-semibold text-blue-500 mb-4 text-center">{locationH3}</h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 padding">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 xl:px-0 max-w-7xl mx-auto">
             {locationData.map((location) => (
               <Link
                 href={
@@ -60,17 +59,14 @@ const LocationIndex = ({
                 }
                 key={location.id}
               >
-                <div className="bg-white rounded-xl shadow-md items-stretch h-full justify-between flex flex-col">
+                <div className="bg-white rounded-xl shadow-md items-stretch h-full justify-between flex flex-col ">
                   <div className="rounded-t-xl overflow-hidden h-48 lg:h-64 border  ">
                     <BlurImage
                       src={(location.thumbnail as Media).url!}
                       alt="location"
-                      className="hover:scale-[103%] h-full w-full object-cover object-top transition-transform duration-300 "
-                      priority
+                      className="hover:scale-[103%] h-full w-full object-cover object-top transition-transform duration-300"
                       width={1920}
                       height={1080}
-                      placeholder="blur"
-                      blurDataURL="/placeholder.jpg"
                     />
                   </div>
                   <div className="p-4">
@@ -93,10 +89,13 @@ const LocationIndex = ({
                       </div>
                     </div>
                   </div>
-                   <Button className="bg-priColor hover:bg-priColor/90 flex gap-2 mb-2 m-4">
-                <span>{locale === 'en' ? 'Read More' : 'Mehr lesen'}</span>{' '}
-                <SquareArrowOutUpRight />
-              </Button>
+
+                  <div className="flex  m-4">
+                    <Button className="bg-priColor hover:bg-priColor/90 flex gap-2">
+                      <span>{locale === 'en' ? 'Read More' : 'Mehr lesen'}</span>{' '}
+                      <SquareArrowOutUpRight />
+                    </Button>
+                  </div>
                 </div>
               </Link>
             ))}

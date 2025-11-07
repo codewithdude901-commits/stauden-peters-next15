@@ -1,5 +1,6 @@
 import { Media } from '@/payload-types'
-import Image from 'next/image'
+
+import BlurImage from '../BlurImage'
 
 const TeamLoc = ({ team, locale }: { team: Media | string; locale: string }) => {
   return (
@@ -19,15 +20,12 @@ const TeamLoc = ({ team, locale }: { team: Media | string; locale: string }) => 
 
         {/* team Photos */}
         <div className="w-full overflow-hidden rounded-xl">
-          <Image
+          <BlurImage
             src={(team as Media).url!}
             alt="team image"
-            width={1920}
-            height={1080}
-            objectFit="cover"
+            width={200}
+            height={200}
             className="rounded-xl w-full h-auto max-h-[700px] overflow-hidden mx-auto object-cover"
-            placeholder="blur"
-            blurDataURL="/placeholder.jpg"
           />
         </div>
       </div>

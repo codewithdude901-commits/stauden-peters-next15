@@ -1,17 +1,25 @@
 'use client'
 
 import cn from 'clsx'
-import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import type { ComponentProps } from 'react'
+import type { ImgHTMLAttributes } from 'react'
 
-export default function BlurImage(props: ComponentProps<typeof Image>) {
+export default function BlurImage(props: ImgHTMLAttributes<HTMLImageElement>) {
   const [isLoading, setLoading] = useState(true)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setLoading(false)
+    }
+  }, [])
 
   return (
-    <Image
+    <img
+      ref={imgRef}
       {...props}
+      loading="eager"
       alt={props.alt}
       className={cn(
         props.className,

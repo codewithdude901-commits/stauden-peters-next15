@@ -1,14 +1,13 @@
 import ProjectCard from '@/components/projects/ProjectCard'
 import { fetchCollection, fetchGlobal } from '@/lib/payloadClient'
 
-
 import { Media, Project, ProjectsIndex } from '@/payload-types'
 
 export default async function Projects() {
-   const intro = await fetchGlobal<ProjectsIndex>({ slug: 'projectsIndex', locale: 'en' })
-   const projectData = await fetchCollection<Project>('projects', { locale: 'en' })
- 
-   if (!intro?.sections || !projectData) return null
+  const intro = await fetchGlobal<ProjectsIndex>({ slug: 'projectsIndex', locale: 'en' })
+  const projectData = await fetchCollection<Project>('projects', { locale: 'en' })
+
+  if (!intro?.sections || !projectData) return null
 
   return (
     <div>
@@ -19,12 +18,12 @@ export default async function Projects() {
           <h2 className="text-3xl font-semibold lg:font-bold lg:text-4xl mb-2 text-priColor">
             {intro?.sections[0]?.headline}
           </h2>
-      
+
           <p className="flex-wrap text-muted-foreground text-sm leading-7 xl:text-base">
-           {intro?.sections[0]?.paragraph}
+            {intro?.sections[0]?.paragraph}
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
           {projectData.map((item, i) => (
             <div key={i}>
               <ProjectCard

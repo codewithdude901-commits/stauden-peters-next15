@@ -81,7 +81,7 @@ const MissionStory = ({ story, ceo, missionVision }: AboutCombinedBlock) => {
             </div>
           </div>
 
-          <div className=" bg-white sm:min-w-[500px] max-w-3xl h-fit  flex-col gap-2  shadow-[0_1px_10px_0px_rgba(0,0,0,0.3)] rounded-3xl">
+          <div className=" bg-white sm:min-w-[500px] max-w-3xl w-full h-fit  flex-col gap-2  shadow-[0_1px_10px_0px_rgba(0,0,0,0.3)] rounded-3xl">
             <div className="relative flex justify-between">
               <div onClick={handleChange2} className={`${div2}  rounded-tl-3xl`}>
                 <Globe2 className="size-12 stroke-1 " />
